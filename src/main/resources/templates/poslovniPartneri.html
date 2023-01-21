@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Poslovni partneri</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+    <h1>Poslovni Partneri</h1>
+    <div class="row col-md-12 table-responsive">
+        <a class="btn btn-primary"
+           th:href="@{'/poslovniPartneri?tipPoslovnogPartnera=0'}"
+           role="button" id="prikaziKupce">Prikazi kupce</a>
+        <a class="btn btn-warning" th:href="@{'/poslovniPartneri?tipPoslovnogPartnera=1'}"
+           role="button" id="prikaziDobavljace"> Prikazi dobavljace</a>
+        <table id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Naziv poslovnog partnera</th>
+                <th>PIB</th>
+                <th>Tekuci racun</th>
+                <th>Adresa</th>
+                <th>Grad</th>
+                <th>Azuriraj</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div th:if="${tipPoslovnogPartnera}">
+                <tr th:each="poslovniPartner, rowStat: ${poslovniPartneri}"
+                    th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                    <td th:text="${poslovniPartner.nazivPoslovnogPartnera}">Naziv</td>
+                    <td th:text="${poslovniPartner.PIB}">PIB</td>
+                    <td th:text="${poslovniPartner.tekuciRacun}">Tekuci racun</td>
+                    <td th:text="${poslovniPartner.adresa}">Adresa</td>
+                    <td th:text="${poslovniPartner.mesto.getGrad()}">Grad</td>
+                    <td><a class="btn btn-primary"
+                           th:href="@{'/poslovniPartneri/azuriraj/' + ${poslovniPartner.id}}"
+                           role="button">Azuriraj</a></td>
+                </tr>
+            </div>
+            <div th:if="${tipPoslovnogPartneraFilter} != null">
+                <tr th:each="poslovniPartner, rowStat: ${poslovniPartneriFilter}"
+                    th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                    <td th:text="${poslovniPartner.nazivPoslovnogPartnera}">Naziv</td>
+                    <td th:text="${poslovniPartner.PIB}">PIB</td>
+                    <td th:text="${poslovniPartner.tekuciRacun}">Tekuci racun</td>
+                    <td th:text="${poslovniPartner.adresa}">Adresa</td>
+                    <td th:text="${poslovniPartner.mesto.getGrad()}">Grad</td>
+                    <td><a class="btn btn-primary"
+                           th:href="@{'/poslovniPartneri/azuriraj/' + ${poslovniPartner.id}}"
+                           role="button">Azuriraj</a></td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/poslovniPartner/dodavanje}"
+           role="button">Dodaj poslovnog partnera</a>
+    </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Preduzece</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+    <h1>Preduzece</h1>
+    <div class="row col-md-12 table-responsive">
+        <table id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Naziv preduzeca</th>
+                <th>PIB</th>
+                <th>Email</th>
+                <th>Adresa</th>
+                <th>Tekuci racun</th>
+                <th>Telefon</th>
+                <th>Mesto</th>
+                <th>Azuriraj podatke</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pred, rowStat: ${preduzece}"
+                th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                <td th:text="${pred.nazivPreduzeca}">Naziv</td>
+                <td th:text="${pred.PIB}">PIB</td>
+                <td th:text="${pred.emailAdresa}">Email</td>
+                <td th:text="${pred.adresa}">Adresa</td>
+                <td th:text="${pred.tekuciRacun}">Tekuci racun</td>
+                <td th:text="${pred.telefon}">Telefon</td>
+                <td th:text="${pred.mesto.getGrad()}">Grad</td>
+                <td><a class="btn btn-primary"
+                       th:href="@{'/preduzece/azuriraj/' + ${pred.Id}}" role="button">Azuriraj</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Azuriraj preduzece</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Azuriranje podataka o preduzecu</h1>
+    </div>
+    <form th:action="@{/preduzece/azuriraj}" th:method="POST"
+          style="max-width: 600px; margin: 0 auto" th:object="${preduzece}">
+
+        <input type="number" th:field="*{id}" hidden required
+               value="${preduzece.id}" />
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Naziv preduzeca</label>
+                <div class=col-8>
+                    <input type="text" class="form-control"
+                           th:field="*{nazivPreduzeca}" required
+                           value="${preduzece.nazivPreduzeca}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">PIB</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{PIB}" required
+                           value="${preduzece.PIB}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Tekuci racun</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{tekuciRacun}"
+                           required value="${preduzece.tekuciRacun}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Email</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{emailAdresa}"
+                           required value="${preduzece.emailAdresa}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Adresa</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{adresa}"
+                           required value="${preduzece.adresa}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Telefon</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{telefon}"
+                           required value="${preduzece.telefon}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Grad</label>
+                <div class=col-8>
+                    <select th:field="*{mesto}">
+                        <option th:each="mesto : ${listaMesta}" th:value="${mesto.id}"
+                                th:text="${mesto.grad}" th:selected="${preduzece.mesto}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Azuriraj
+                podatke</button>
+        </div>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

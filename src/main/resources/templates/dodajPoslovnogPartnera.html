@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Dodaj poslovnog partnera</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Dodaj poslovnog partnera</h1>
+    </div>
+    <form th:action="@{/poslovniPartner/dodavanje}" th:method="POST"
+          style="max-width: 600px; margin: 0 auto"
+          th:object="${poslovniPartner}">
+        <div class="form-group row">
+            <label class="col-form-label col-4">Naziv poslovnog partnera</label>
+            <div class=col-8>
+                <input type="text" class="form-control"
+                       th:field="*{nazivPoslovnogPartnera}" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">PIB</label>
+            <div class=col-8>
+                <input type="text" class="form-control" th:field="*{PIB}" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Adresa</label>
+            <div class=col-8>
+                <input type="text" class="form-control" th:field="*{adresa}"
+                       required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Tekuci racun</label>
+            <div class=col-8>
+                <input type="text" class="form-control" th:field="*{tekuciRacun}"
+                       required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Grad</label>
+            <div class=col-8>
+                <select th:field="*{mesto}" class="form-control">
+                    <option th:each="mesto : ${listaMesta}" th:value="${mesto.id}"
+                            th:text="${mesto.grad}" th:selected="${poslovniPartner.mesto}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-form-label col-4">Tip poslovnog partnera</label>
+            <div class=col-8>
+                <select name="tipPoslovnogPartnera" id="tipPoslovnogPartnera"
+                        class="form-control" th:field="*{tipPoslovnogPartnera}">
+                    <option
+                            th:each="vrstaPoslovnogPartnera: ${T(com.poslovnainformatika.app.domain.PoslovniPartner.TipPoslovnogPartnera).values()}"
+                            th:value="${vrstaPoslovnogPartnera}"
+                            th:text="${vrstaPoslovnogPartnera}"></option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </div>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

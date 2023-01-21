@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Preduzece</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+    <h1>Stope PDV</h1>
+    <div class="row col-md-12 table-responsive">
+        <table id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Vrsta PDV</th>
+                <th>Procenat</th>
+                <th>Rok vazenja</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stopaPdv, rowStat: ${listaStopaPdv}"
+                th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                <td th:text="${stopaPdv.pdv.vrstaPdv}">Vrsta PDV</td>
+                <td th:text="${stopaPdv.procenat}">Procenat</td>
+                <td th:text="${dateFormat.format(stopaPdv.rokVazenja)}">Rok
+                    vazenja</td>
+                <td><a class="btn btn-primary"
+                       th:href="@{'/stopaPdv/azuriraj/' + ${stopaPdv.Id}}" role="button">Azuriraj</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/stopaPdv/kreiraj}"
+           role="button">Kreiraj Stopu PDV</a>
+    </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>
