@@ -16,8 +16,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @Entity
+@Where(clause = "obrisano='false'")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class GrupaRobe {
 
@@ -35,12 +37,8 @@ public class GrupaRobe {
 	private Preduzece preduzece;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pdv_id")
-	private Pdv pdv;
-
-	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "stopa_pdv_id")
-	private StopaPdv stopapdv;
+	private StopaPdv stopaPdv;
 
 	private boolean obrisano;
 

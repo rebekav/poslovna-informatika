@@ -27,9 +27,6 @@ public class Pdv {
 	@OneToMany(mappedBy = "pdv", cascade = CascadeType.ALL)
 	private Set<StopaPdv> stopePdv = new HashSet<>();
 
-	@OneToMany(mappedBy = "pdv", cascade = CascadeType.ALL)
-	private Set<GrupaRobe> grupaRobe = new HashSet<>();
-
 	private boolean obrisano;
 
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Azuriraj robu</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Azuriranje podataka o artiklu robe</h1>
+    </div>
+    <form th:action="@{/roba/azuriraj}" th:method="PUT"
+          style="max-width: 600px; margin: 0 auto" th:object="${roba}">
+
+        <input type="number" id="robaId" th:field="*{id}" hidden required
+               value="${roba.id}" />
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Naziv</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{nazivRobe}"
+                           required value="${roba.nazivRobe}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Jedinica mere</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{jedinicaMere}"
+                           required value="${roba.jedinicaMere}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Grupa robe</label>
+                <div class=col-8>
+                    <select name="grupaRobe" id="grupaRobe" class="form-control"
+                            th:field="*{grupaRobe}">
+                        <option th:each="grupaRobe : ${listaGrupeRobe}"
+                                th:value="${grupaRobe.id}" th:text="${grupaRobe.naziv}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Azuriraj
+                podatke</button>
+        </div>
+    </form>
+</div>
+<div class="container text-center">
+    <form th:action="@{/roba/izbrisi}" th:method="DELETE"
+          style="max-width: 600px; margin: 0 auto" th:object="${roba}">
+        <input type="number" hidden required name="robaIdDelete"
+               id="robaIdDelete" />
+        <button type="submit" class="btn btn-danger" style="margin: 15px">Obrisi
+            artikal</button>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+<script>
+		$(document).ready(function() {
+			var robaId = $('#robaId').val();
+			$('#robaIdDelete').attr('value', robaId);
+		});
+	</script>
+</body>
+</html>

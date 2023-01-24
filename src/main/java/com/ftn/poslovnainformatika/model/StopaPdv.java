@@ -40,7 +40,7 @@ public class StopaPdv {
 	@JoinColumn(name = "pdv_id")
 	private Pdv pdv;
 
-	@OneToMany(mappedBy = "stopapdv", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "stopaPdv", cascade = CascadeType.ALL)
 	private Set<GrupaRobe> grupeRobe = new HashSet<>();
 
 	private boolean obrisano;

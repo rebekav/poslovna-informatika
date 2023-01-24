@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Grupa robe</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+    <h1>Grupa robe</h1>
+    <div class="row col-md-12 table-responsive">
+        <table id="customerTable" class="table">
+            <thead>
+            <tr>
+                <th>Naziv grupe</th>
+                <th>PDV</th>
+                <th>Stopa pdv</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="grupaRobe, rowStat: ${listaGrupaRobe}"
+                th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                <td th:text="${grupaRobe.naziv}">Naziv grupe</td>
+                <td th:text="${grupaRobe.stopaPdv.pdv.vrstaPdv}">PDV</td>
+                <td th:text="${grupaRobe.stopaPdv.procenat} + ' %'">Stopa pdv</td>
+                <td><a class="btn btn-primary"
+                       th:href="@{'/grupaRobe/azuriraj/' + ${grupaRobe.Id}}" role="button">Azuriraj</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/grupaRobe/kreiraj}"
+           role="button">Kreiraj grupu robe</a>
+    </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

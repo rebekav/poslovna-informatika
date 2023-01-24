@@ -9,6 +9,8 @@ public interface IGrupaRobeService {
 
     GrupaRobe findOne(Long id);
 
+    void izbrisiGrupuRobe(GrupaRobe grupaRobe);
+
     void save(GrupaRobe grupaRobe);
 
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Kreiraj robu</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Kreiraj novi artikal robe</h1>
+    </div>
+    <form th:action="@{/roba/kreiraj}" th:method="POST"
+          style="max-width: 600px; margin: 0 auto" th:object="${roba}">
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Naziv</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{nazivRobe}"
+                           required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Jedinica mere</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{jedinicaMere}"
+                           required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Grupa robe</label>
+                <div class=col-8>
+                    <select name="grupaRobe" id="grupaRobe" class="form-control"
+                            th:field="*{grupaRobe}">
+                        <option th:each="grupaRobe : ${listaGrupeRobe}"
+                                th:value="${grupaRobe.id}" th:text="${grupaRobe.naziv}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Kreiraj</button>
+        </div>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

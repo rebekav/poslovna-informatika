@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Azuriraj grupu robe</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Azuriranje podataka o grupi robe</h1>
+    </div>
+    <form th:action="@{/grupaRobe/azuriraj}" th:method="PUT"
+          style="max-width: 600px; margin: 0 auto" th:object="${grupaRobe}">
+
+        <input type="number" id="grupaRobeId" th:field="*{id}" hidden required
+               value="${grupaRobe.id}" />
+        <div class="m-3">
+            <div class="form-group row">
+                <label class="col-form-label col-4">Naziv grupe robe</label>
+                <div class=col-8>
+                    <input type="text" class="form-control" th:field="*{naziv}"
+                           required value="${grupaRobe.naziv}" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Preduzece</label>
+                <div class=col-8>
+                    <select name="preduzece" id="preduzece" class="form-control"
+                            th:field="*{preduzece}">
+                        <option th:each="preduzece : ${listaPreduzeca}"
+                                th:value="${preduzece.id}" th:text="${preduzece.nazivPreduzeca}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-form-label col-4">Stopa PDV</label>
+                <div class=col-8>
+                    <select name="stopaPdv" id="stopaPdv" class="form-control"
+                            th:field="*{stopaPdv}">
+                        <option th:each="stopaPdv : ${listaStopaPdv}"
+                                th:value="${stopaPdv.id}" th:text="${stopaPdv.pdv.vrstaPdv} + ' (' + ${stopaPdv.procenat} + ' %)'"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Azuriraj
+                podatke</button>
+        </div>
+    </form>
+</div>
+<div class="container text-center">
+    <form th:action="@{/grupaRobe/izbrisi}" th:method="DELETE"
+          style="max-width: 600px; margin: 0 auto" th:object="${grupaRobe}">
+        <input type="number" hidden required name="grupaRobeIdDelete"
+               id="grupaRobeIdDelete" />
+        <button type="submit" class="btn btn-danger" style="margin: 15px">Obrisi
+            grupu robe</button>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+<script>
+		$(document).ready(function() {
+			var grupaRobeId = $('#grupaRobeId').val();
+			$('#grupaRobeIdDelete').attr('value', grupaRobeId);
+		});
+	</script>
+</body>
+</html>

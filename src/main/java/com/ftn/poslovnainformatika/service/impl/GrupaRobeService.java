@@ -33,7 +33,13 @@ public class GrupaRobeService implements IGrupaRobeService {
 
     @Override
     public void save(GrupaRobe grupaRobe) {
+
         grupaRobeRepository.save(grupaRobe);
     }
 
+    @Override
+    public void izbrisiGrupuRobe(GrupaRobe grupaRobe) {
+        grupaRobe.setObrisano(true);
+        grupaRobeRepository.save(grupaRobe);
+    }
 }

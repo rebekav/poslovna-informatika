@@ -67,10 +67,11 @@ public class StopaPdvController {
     }
 
     @PostMapping("/stopaPdv/azuriraj")
-    public String azurirajStopuPdv(StopaPdvDTO stopaPdvDTO, String rokVazenja) {
+    public String azurirajStopuPdv(StopaPdvDTO stopaPdvDTO) {
         stopaPdvService.save(stopaPdvDTOToStopaPdv.konvertujDtoToEntity(stopaPdvDTO));
         return "redirect:/stopaPdv";
     }
+
 
     @GetMapping("/stopaPdv/kreiraj")
     public String prikaziStopuPdv(Model model) {
