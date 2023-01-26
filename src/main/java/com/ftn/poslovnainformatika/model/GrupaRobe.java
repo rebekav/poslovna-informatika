@@ -3,14 +3,7 @@ package com.ftn.poslovnainformatika.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +22,11 @@ public class GrupaRobe {
 
 	private String naziv;
 
-	@OneToMany(mappedBy = "grupaRobe", cascade = CascadeType.ALL)
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.ALL,
+			mappedBy = "grupaRobe"
+	)
 	private Set<Roba> robe = new HashSet<>();
 
 	@ManyToOne(cascade = CascadeType.ALL)

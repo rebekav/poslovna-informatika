@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Where(clause = "obrisano='false'")
-
+@SQLDelete(sql="UPDATE roba SET obrisano=true Where id=?")
 public class Roba {
 
 	@Id

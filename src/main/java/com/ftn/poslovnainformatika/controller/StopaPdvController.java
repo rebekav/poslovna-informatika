@@ -90,7 +90,7 @@ public class StopaPdvController {
 
     @DeleteMapping("/stopaPdv/izbrisi")
     public String izbrisiStopuPdv(Long stopaPdvIdDelete) {
-        StopaPdv stopaPdv = stopaPdvService.findOne(stopaPdvIdDelete);;
+        StopaPdv stopaPdv = stopaPdvService.findOne(stopaPdvIdDelete);
         stopaPdvService.izbrisiStopuPdv(stopaPdv);
         return "redirect:/stopaPdv";
     }

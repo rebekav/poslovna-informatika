@@ -15,13 +15,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Where(clause = "obrisano='false'")
 public class PoslovniPartner {
 
 	@Id
@@ -56,7 +63,7 @@ public class PoslovniPartner {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "mesto_id")
-	public Mesto mesto;
+	private Mesto mesto;
 
 	@OneToMany(mappedBy = "poslovniPartner", cascade = CascadeType.ALL)
 	private Set<Cenovnik> cenovnici = new HashSet<>();

@@ -27,9 +27,6 @@ public class GrupaRobeController {
     private IGrupaRobeService grupaRobeService;
 
     @Autowired
-    private IRobaService robaService;
-
-    @Autowired
     private IStopaPdvService stopaPdvService;
 
     @Autowired
@@ -85,9 +82,8 @@ public class GrupaRobeController {
 
     @DeleteMapping("/grupaRobe/izbrisi")
     public String izbrisiGrupuRobe(Long grupaRobeIdDelete) {
-        GrupaRobe grupaRobe = grupaRobeService.findOne(grupaRobeIdDelete);;
+        GrupaRobe grupaRobe = grupaRobeService.findOne(grupaRobeIdDelete);
         grupaRobeService.izbrisiGrupuRobe(grupaRobe);
-        robaService.izbrisiRobuByGrupaRobeId(grupaRobeIdDelete);
         return "redirect:/grupaRobe";
     }
 

@@ -14,7 +14,7 @@
     <form th:action="@{/poslovniPartneri/azuriraj}" th:method="POST"
           style="max-width: 600px; margin: 0 auto"
           th:object="${poslovniPartner}">
-        <input type="number" th:field="*{id}" hidden required
+        <input type="number" id="poslovniPartnerId" th:field="*{id}" hidden required
                value="${poslovniPartner.id}" />
         <div class="m-3">
             <div class="form-group row">
@@ -74,6 +74,24 @@
         </div>
     </form>
 </div>
+
+<div class="container text-center">
+    <form th:action="@{/poslovniPartner/izbrisi}" th:method="DELETE"
+          style="max-width: 600px; margin: 0 auto" th:object="${poslovniPartner}">
+        <input type="number" hidden required name="poslovniPartnerIdDelete"
+               id="poslovniPartnerIdDelete" />
+        <button type="submit" class="btn btn-danger" style="margin: 15px">Obrisi
+            poslovnog partnera</button>
+    </form>
+</div>
+
 <div th:replace="template :: scriptFrag"></div>
+
+<script>
+    $(document).ready(function() {
+        var poslovniPartnerId = $('#poslovniPartnerId').val();
+        $('#poslovniPartnerIdDelete').attr('value', poslovniPartnerId);
+    });
+</script>
 </body>
 </html>

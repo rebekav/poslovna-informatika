@@ -11,6 +11,8 @@ public interface IGrupaRobeService {
 
     void izbrisiGrupuRobe(GrupaRobe grupaRobe);
 
+    void izbrisiGrupuRobeByStopaPdvId(Long stopaPdvId);
+
     void save(GrupaRobe grupaRobe);
 
 }

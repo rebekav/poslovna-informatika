@@ -17,8 +17,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @Entity
+@Where(clause = "obrisano='false'")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Mesto {
 
@@ -37,4 +39,5 @@ public class Mesto {
 	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "mesto")
 	private Set<Preduzece> preduzeca = new HashSet<>();
 
+	private boolean obrisano;
 }

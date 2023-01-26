@@ -1,5 +1,8 @@
 package com.ftn.poslovnainformatika.model;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +43,7 @@ public class StopaPdv {
 	@JoinColumn(name = "pdv_id")
 	private Pdv pdv;
 
-	@OneToMany(mappedBy = "stopaPdv", cascade = CascadeType.ALL)
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "stopaPdv")
 	private Set<GrupaRobe> grupeRobe = new HashSet<>();
 
 	private boolean obrisano;

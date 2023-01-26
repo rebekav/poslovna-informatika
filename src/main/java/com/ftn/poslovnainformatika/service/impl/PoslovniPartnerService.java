@@ -29,4 +29,20 @@ public class PoslovniPartnerService implements IPoslovniPartnerService {
         poslovniPartnerRepository.save(poslovniPartner);
     }
 
+    @Override
+    public void izbrisiPoslovnogPartnera(PoslovniPartner poslovniPartner) {
+        poslovniPartner.setObrisano(true);
+        poslovniPartnerRepository.save(poslovniPartner);
+    }
+
+    @Override
+    public void izbrisiPoslovnogPartneraByMestoId(Long mestoId) {
+
+        List<PoslovniPartner> listaPoslovnihPartnera = poslovniPartnerRepository.findByMestoId(mestoId);
+        for (PoslovniPartner poslovniPartner : listaPoslovnihPartnera) {
+            izbrisiPoslovnogPartnera(poslovniPartner);
+        }
+
+    }
+
 }

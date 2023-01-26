@@ -42,7 +42,7 @@ public class PreduzeceController {
     MestoToMestoDTO mestoToMestoDTO;
 
 
-    @GetMapping("/preduzece")
+    @GetMapping("/")
     public String vratiPreduzeca(Model model) {
         List<Preduzece> preduzece = preduzeceService.findAll();
         List<PreduzeceDTO> preduzeceDTO = preduzeceToPreduzeceDTO.konvertujEntityToDto(preduzece);
