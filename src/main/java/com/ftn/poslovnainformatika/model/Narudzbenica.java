@@ -1,17 +1,8 @@
 package com.ftn.poslovnainformatika.model;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,7 +21,8 @@ public class Narudzbenica {
 
 	private Date datumNarudzbenice;
 
-	private boolean tipNarudzbenice;
+	@Column(name = "tip_narudzbenice")
+	private TipNarudzbenice tipNarudzbenice;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "poslovna_godina_id")
@@ -54,5 +46,30 @@ public class Narudzbenica {
 	private Set<Faktura> fakture = new HashSet<>();
 
 	private boolean obrisano;
+
+	public enum TipNarudzbenice {
+		ULAZNA(0), IZLAZNA(1);
+
+		private int value;
+		private static Map map = new HashMap();
+
+		private TipNarudzbenice(int value) {
+			this.value = value;
+		}
+
+		static {
+			for (TipNarudzbenice tipNarudzbenice : TipNarudzbenice.values()) {
+				map.put(tipNarudzbenice.value, tipNarudzbenice);
+			}
+		}
+
+		public static TipNarudzbenice valueOf(int tip) {
+			return (TipNarudzbenice) map.get(tip);
+		}
+
+		public int getValue() {
+			return value;
+		}
+	}
 
 }

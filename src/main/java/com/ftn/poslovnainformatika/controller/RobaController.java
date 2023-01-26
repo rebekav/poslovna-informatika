@@ -1,5 +1,6 @@
 package com.ftn.poslovnainformatika.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ftn.poslovnainformatika.dto.RobaDTO;
 import com.ftn.poslovnainformatika.mapper.GrupaRobeDTOToGrupaRobe;
 import com.ftn.poslovnainformatika.mapper.GrupaRobeToGrupaRobeDTO;
@@ -44,6 +45,15 @@ public class RobaController {
         List<RobaDTO> listaRobeDTO = robaToRobaDTO.konvertujEntityToDto(listaRobe);
         model.addAttribute("listaRobe", listaRobeDTO);
         return "roba";
+    }
+
+    @GetMapping("/roba/{roba}")
+    @JsonIgnore
+    public @ResponseBody RobaDTO getRoba(@PathVariable("roba") long id) {
+        Roba roba = robaService.findOne(id);
+
+        RobaDTO robaDTO= robaToRobaDTO.konvertujEntityToDto(roba);
+        return robaDTO;
     }
 
     @GetMapping("/roba/azuriraj/{id}")
