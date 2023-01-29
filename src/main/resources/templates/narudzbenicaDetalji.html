@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+  <div th:replace="template :: header"></div>
+  <title>Narudzbenice</title>
+
+</head>
+
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 my-3">
+        <div class="card" style="height:100%">
+          <div class="card-body">
+            <h5><b>Narudzbenica</b></h5>
+            <div class="col-md my-3">
+              <p class="card-text p-y-1">Broj: <span th:text="${narudzbenica.brojNarudzbenice}"></span></p>
+              <p class="card-text p-y-1">Datum izdavanja: <span th:text="${narudzbenica.datumNarudzbenice}"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 my-3">
+        <div class="card">
+          <div class="card-body">
+            <h5><b>POSLOVNI PARTNER</b></h5>
+            <div class="col-md my-3">
+              <p class="card-text p-y-1">Naziv: <span th:text="${poslovniPartner.nazivPoslovnogPartnera}"></span></p>
+              <p class="card-text p-y-1">Broj tekuceg racuna: <span th:text="${poslovniPartner.tekuciRacun}"></span></p>
+              <p class="card-text p-y-1">Mesto: <span th:text="${poslovniPartner.mesto.grad}"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table id="stavkeTable" class="table">
+          <thead>
+          <tr>
+            <th>Naziv robe</th>
+            <th>Jedinica mere</th>
+            <th>Kolicina</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="stavka, rowStat: ${stavkeNarudzbenice}"
+              th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+            <td th:text="${stavka.opis}">Naziv robe</td>
+            <td th:text="${stavka.jedinicaMere}">Jedinica mere</td>
+            <td th:text="${stavka.kolicina}">Kolicina</td>
+          </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary"  id="addStavkaNarudzbenica">Dodavanje stavke</button>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="addModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="title" class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div id="inputRoba"><div class="input-group-prepend"><span class="input-group-text">Roba</span></div>
+              <br>
+              <select id="roba" class="form-control">
+                <option th:each="roba : ${robe}" th:value="${roba.id}"
+                        th:text="${roba.nazivRobe}" th:selected="${roba}"></option>
+              </select>
+              <br>
+            </div>
+            <div class="input-group-prepend">Kolicina: <input type="number" value="1" min="1" step="1" class="form-control" id="kolicina" placeholder="kolicina">
+              <br>
+              <!-- <span class="input-group-text" id="jedinicaMere"></span></div> -->
+            </div>
+            <br>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="confirmSave">Sacuvaj</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Otkazi</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="modal" tabindex="-1" role="dialog" id="delete_stavka">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-mercator">
+          <h5 class="modal-title ">Brisanaje stavke</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="delete_content"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="delete_confirm">Obrisi</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Odustani</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="template :: scriptFrag"></div>
+  <script  th:src="@{/js/narudzbenica.js}"></script>
+
+</body>
+</html>

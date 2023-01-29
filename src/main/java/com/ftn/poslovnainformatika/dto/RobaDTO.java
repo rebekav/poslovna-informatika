@@ -1,6 +1,7 @@
 package com.ftn.poslovnainformatika.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ftn.poslovnainformatika.model.GrupaRobe;
 import com.ftn.poslovnainformatika.model.StavkaFakture;
 import com.ftn.poslovnainformatika.model.StavkeCenovnika;
@@ -24,10 +25,13 @@ public class RobaDTO {
 
     private String jedinicaMere;
 
+    @JsonIgnore
     private GrupaRobe grupaRobe;
 
+    @JsonIgnore
     private Set<StavkeCenovnika> stavkeCenovnika = new HashSet<>();
 
+    @JsonIgnore
     private Set<StavkaFakture> stavkeFakture = new HashSet<>();
 
     private boolean obrisano;
