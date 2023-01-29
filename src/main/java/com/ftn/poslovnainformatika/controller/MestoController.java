@@ -63,7 +63,8 @@ public class MestoController {
 
     @DeleteMapping("/mesto/izbrisi")
     public String izbrisiMesto(Long mestoIdDelete) {
-        mestoService.delete(mestoIdDelete);
+        Mesto mesto = mestoService.findOne(mestoIdDelete);
+        mestoService.izbrisiMesto(mesto);
         return "redirect:/mesto";
     }
 

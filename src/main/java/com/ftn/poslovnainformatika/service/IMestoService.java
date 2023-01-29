@@ -8,4 +8,8 @@ public interface IMestoService {
 
     Mesto findOne(Long id);
     List<Mesto> findAll();
+
+    void save(Mesto mesto);
+
+    void izbrisiMesto(Mesto mesto);
 }

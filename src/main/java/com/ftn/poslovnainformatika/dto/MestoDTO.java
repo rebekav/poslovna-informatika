@@ -17,4 +17,5 @@ public class MestoDTO {
 
     private Long postanskiBroj;
 
+    private boolean obrisano;
 }

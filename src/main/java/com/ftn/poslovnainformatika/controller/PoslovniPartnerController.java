@@ -14,10 +14,7 @@ import com.ftn.poslovnainformatika.service.IPoslovniPartnerService;
 import com.ftn.poslovnainformatika.service.IPreduzeceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,6 +99,14 @@ public class PoslovniPartnerController {
         partner.setPreduzece(preduzeca.get(0));
         partner.setObrisano(false);
         poslovniPartnerServiceInterface.save(partner);
+
+        return "redirect:/poslovniPartneri";
+    }
+
+    @DeleteMapping("/poslovniPartner/izbrisi")
+    public String izbrisiPoslovnogPartnera(Long poslovniPartnerIdDelete) {
+        PoslovniPartner poslovniPartner = poslovniPartnerServiceInterface.findOne(poslovniPartnerIdDelete);
+        poslovniPartnerServiceInterface.izbrisiPoslovnogPartnera(poslovniPartner);
 
         return "redirect:/poslovniPartneri";
     }

@@ -3,6 +3,7 @@ package com.ftn.poslovnainformatika.service.impl;
 import com.ftn.poslovnainformatika.model.Mesto;
 import com.ftn.poslovnainformatika.repository.MestoRepository;
 import com.ftn.poslovnainformatika.service.IMestoService;
+import com.ftn.poslovnainformatika.service.IPoslovniPartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class MestoService implements IMestoService {
 
     @Autowired
     MestoRepository mestoRepository;
+
+    @Autowired
+    IPoslovniPartnerService poslovniPartnerService;
 
     @Override
     public Mesto findOne(Long id) {
@@ -29,5 +33,18 @@ public class MestoService implements IMestoService {
     public List<Mesto> findAll() {
 
         return mestoRepository.findAll();
+    }
+
+    @Override
+    public void save(Mesto mesto) {
+        mestoRepository.save(mesto);
+
+    }
+
+    @Override
+    public void izbrisiMesto(Mesto mesto) {
+        mesto.setObrisano(true);
+        poslovniPartnerService.izbrisiPoslovnogPartneraByMestoId(mesto.getId());
+        mestoRepository.save(mesto);
     }
 }

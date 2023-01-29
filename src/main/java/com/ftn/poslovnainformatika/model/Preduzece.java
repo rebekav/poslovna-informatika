@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.SQLDelete;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,7 @@ public class Preduzece {
 	@Column(name = "naziv_preduzeca")
 	private String nazivPreduzeca;
 
+	@Column(name = "pib")
 	private String PIB;
 
 	@Column(name = "tekuci_racun")

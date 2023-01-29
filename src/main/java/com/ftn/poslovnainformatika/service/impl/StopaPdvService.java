@@ -2,6 +2,7 @@ package com.ftn.poslovnainformatika.service.impl;
 
 import com.ftn.poslovnainformatika.model.StopaPdv;
 import com.ftn.poslovnainformatika.repository.StopaPdvRepository;
+import com.ftn.poslovnainformatika.service.IGrupaRobeService;
 import com.ftn.poslovnainformatika.service.IStopaPdvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class StopaPdvService implements IStopaPdvService {
 
     @Autowired
     StopaPdvRepository stopaPdvRepository;
+
+    @Autowired
+    private IGrupaRobeService grupaRobeService;
 
     @Override
     public StopaPdv findOne(Long id) {
@@ -39,6 +43,7 @@ public class StopaPdvService implements IStopaPdvService {
     @Override
     public void izbrisiStopuPdv(StopaPdv stopaPdv) {
         stopaPdv.setObrisano(true);
+        grupaRobeService.izbrisiGrupuRobeByStopaPdvId(stopaPdv.getId());
         stopaPdvRepository.save(stopaPdv);
     }
 
