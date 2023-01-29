@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+  <div th:replace="template :: header"></div>
+  <title>Azuriraj mesto</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+  <div>
+    <h1>Azuriranje podataka o mestu</h1>
+  </div>
+  <form th:action="@{/mesto/azuriraj}" th:method="PUT"
+        style="max-width: 600px; margin: 0 auto" th:object="${mesto}">
+
+    <input type="number" id="mestoId" th:field="*{id}" hidden required
+           value="${mesto.id}" />
+    <div class="m-3">
+      <div class="form-group row">
+        <label class="col-form-label col-4">Grad</label>
+        <div class=col-8>
+          <input type="text" class="form-control" th:field="*{grad}"
+                 required value="${mesto.grad}" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-form-label col-4">Postanski broj</label>
+        <div class=col-8>
+          <input type="text" class="form-control" th:field="*{postanskiBroj}"
+                 required value="${mesto.postanskiBroj}" />
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Azuriraj
+        podatke</button>
+    </div>
+  </form>
+</div>
+<div class="container text-center">
+  <form th:action="@{/mesto/izbrisi}" th:method="DELETE"
+        style="max-width: 600px; margin: 0 auto" th:object="${mesto}">
+    <input type="number" hidden required name="mestoIdDelete"
+           id="mestoIdDelete" />
+    <button type="submit" class="btn btn-danger" style="margin: 15px">Obrisi
+      mesto</button>
+  </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+<script>
+  $(document).ready(function() {
+    var mestoId = $('#mestoId').val();
+    $('#mestoIdDelete').attr('value', mestoId);
+  });
+</script>
+</body>
+</html>
