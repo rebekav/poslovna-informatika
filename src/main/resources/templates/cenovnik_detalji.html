@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmls:th="http/www.thymeleaf.org">
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Cenovnik</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+    <input type="hidden" class="cenovnikId" th:value="${cenovnik.id}" />
+    <h1 align="center">Datum vazenja cenovnika</h1>
+    <h3 align="center" th:text="${cenovnik.pocetakRokaTrajanja}+do+${cenovnik.krajRokaTrajanja}"></h3>
+    <div class="row col-md-12 table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Roba</th>
+                <th>Cena</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="stavkaCen, rowStat: ${stavkeCenovnika}"
+                th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+                <td th:text="${stavkaCen.roba.nazivRobe}">Roba</td>
+                <td th:text="${stavkaCen.cena}">Cena</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary"  id="addStavkaCenovnika">Dodavanje stavke</button>
+
+    </div>
+</div>
+
+
+<div id="addModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="title" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div id="inputRoba"><div class="input-group-prepend"><span class="input-group-text">Roba</span></div>
+                        <br>
+                        <select id="roba" class="form-control">
+                            <option th:each="roba : ${listRoba}" th:value="${roba.id}"
+                                    th:text="${roba.nazivRobe}" th:selected="${roba}"></option>
+                        </select>
+                        <br>
+                    </div>
+                    <div class="input-group-prepend">Cena: <input type="number" value="1" min="1"  class="form-control" id="cena" placeholder="cena">
+                        <br>
+                        <!-- <span class="input-group-text" id="jedinicaMere"></span></div> -->
+                    </div>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmSave">Sacuvaj</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Otkazi</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+<script  th:src="@{/js/stavkeCenovnika.js}"></script>
+</body>
+</html>

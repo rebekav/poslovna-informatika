@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmls:th="http/www.thymeleaf.org">
+<head>
+  <div th:replace="template :: header"></div>
+  <title>Cenovnici</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+  <h1>Cenovnici</h1>
+  <div class="row col-md-12 table-responsive">
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Datum vazenja od</th>
+        <th>Datum vazenja do</th>
+        <th>Poslovni partner</th>
+        <th>Detalji</th>
+      </tr>
+      </thead>
+      <tbody>
+      <div>
+        <tr th:each="cenovnik, rowStat: ${cenovnici}"
+            th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+          <td th:text="${cenovnik.pocetakRokaTrajanja}">Datum vazenja od</td>
+          <td th:text="${cenovnik.krajRokaTrajanja}">Datum vazenja do</td>
+          <td th:text="${cenovnik.poslovniPartner.nazivPoslovnogPartnera}">Poslovni partner</td>
+          <td><a class="btn btn-primary"
+                 th:href="@{'/cenovnik/detalji/' + ${cenovnik.id}}"
+                 role="button">Detalji</a></td>
+        </tr>
+      </div>
+
+      </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{/cenovnici/dodavanje}"
+       role="button">Dodaj cenovnik</a>
+  </div>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

@@ -1,11 +1,13 @@
 package com.ftn.poslovnainformatika.controller;
 
+import com.ftn.poslovnainformatika.dto.NarudzbenicaDTO;
+import com.ftn.poslovnainformatika.mapper.NarudzbenicaDtoToNarudzbenica;
+import com.ftn.poslovnainformatika.mapper.NarudzbenicaToNarudzbenicaDTO;
 import com.ftn.poslovnainformatika.mapper.PoslovniPartnerToPoslovniPartnerDTO;
 import com.ftn.poslovnainformatika.mapper.RobaToRobaDTO;
 import com.ftn.poslovnainformatika.model.*;
-import com.ftn.poslovnainformatika.service.IPoslovniPartnerService;
-import com.ftn.poslovnainformatika.service.IPreduzeceService;
-import com.ftn.poslovnainformatika.service.IRobaService;
+import com.ftn.poslovnainformatika.model.Narudzbenica.TipNarudzbenice;
+import com.ftn.poslovnainformatika.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +42,7 @@ public class NarudzbenicaController {
     IRobaService robaService;
 
     @Autowired
-    NarudzbenicaDTOToNarudzbenica narudzbenicaDTOToNarudzbenica;
+    NarudzbenicaDtoToNarudzbenica narudzbenicaDTOToNarudzbenica;
 
     @Autowired
     NarudzbenicaToNarudzbenicaDTO narudzbenicaToNarudzbenicaDTO;
