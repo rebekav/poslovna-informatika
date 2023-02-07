@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org" >
+<head>
+  <div th:replace="template :: header"></div>
+  <title>Narudzbenice</title>
+
+</head>
+
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 my-3">
+        <div class="card" style="height:100%">
+          <div class="card-body">
+            <h5><b>Faktura</b></h5>
+            <div class="col-md my-3">
+              <p class="card-text p-y-1">Broj: <span th:text="${faktura.brojFakture}"></span></p>
+              <p class="card-text p-y-1">Datum fakture: <span th:text="${faktura.datumFakture}"></span></p>
+              <p class="card-text p-y-1">Datum valute: <span th:text="${faktura.datumValute}"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 my-3">
+        <div class="card">
+          <div class="card-body">
+            <h5><b>POSLOVNI PARTNER</b></h5>
+            <div class="col-md my-3">
+              <p class="card-text p-y-1">Naziv: <span th:text="${poslovniPartner.nazivPoslovnogPartnera}"></span></p>
+              <p class="card-text p-y-1">Broj tekuceg racuna: <span th:text="${poslovniPartner.tekuciRacun}"></span></p>
+              <p class="card-text p-y-1">Mesto: <span th:text="${poslovniPartner.mesto.grad}"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <table id="stavkeTable" class="table">
+          <thead>
+          <tr>
+            <th>Redni broj</th>
+            <th>Naziv robe</th>
+            <th>Jedinica mere</th>
+            <th>Kolicina</th>
+            <th>Cena bez PDV</th>
+            <th>PDV (%)</th>
+            <th>Iznos PDV</th>
+            <th>Ukupan iznos</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="stavka, rowStat: ${stavkeFakture}"
+              th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+            <td th:text="${rowStat.index+1}">Redni broj</td>
+            <td th:text="${stavka.roba.nazivRobe}">Naziv robe</td>
+            <td th:text="${stavka.roba.jedinicaMere}">Jedinica mere</td>
+            <td th:text="${stavka.kolicina}">Kolicina</td>
+            <td th:text="${stavka.osnovicaPDV}">Osnovica PDV</td>
+            <td th:text="${stavka.procenatPDV}">PDV procenat</td>
+            <td th:text="${stavka.iznosPDV}">PDV iznos</td>
+            <td th:text="${stavka.ukupanIznos}">Ukupan iznos</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="card-body" style="float:right; background-color:grey">
+          <div class="col-md my-3">
+            <p class="card-text p-y-1">Osnovica: <span th:text="${faktura.osnovica}"></span></p>
+            <p class="card-text p-y-1">PDV: <span th:text="${faktura.ukupanPdv}"></span></p>
+            <p class="card-text p-y-1">Rabat: <span th:text="${faktura.rabat}"></span></p>
+            <p class="card-text p-y-1">Ukupno: <span th:text="${faktura.iznosZaPlacanje}"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div th:replace="template :: scriptFrag"></div>
+
+</body>
+</html>

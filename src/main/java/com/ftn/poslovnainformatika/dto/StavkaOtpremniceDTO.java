@@ -1,8 +1,5 @@
 package com.ftn.poslovnainformatika.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ftn.poslovnainformatika.model.Cenovnik;
-import com.ftn.poslovnainformatika.model.Roba;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +9,23 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StavkaCenovnikaDTO {
+public class StavkaOtpremniceDTO {
 
     private long id;
 
+    private String jedinicaMere;
+
+    private int kolicina;
+
+    private String opis;
+
     private float cena;
 
-    @JsonIgnore
-    private Cenovnik cenovnik;
+    private float ukupanIznos;
 
-    @JsonIgnore
-    private Roba roba;
+    private long otpremnica;
+
+    private long roba;
 
     private boolean obrisano;
 }

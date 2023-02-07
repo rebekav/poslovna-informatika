@@ -21,7 +21,6 @@
         <tr>
           <th>Broj narudzbenice</th>
           <th>Poslovni partner</th>
-          <th>Azuriraj</th>
         </tr>
         </thead>
         <tbody>
@@ -31,9 +30,7 @@
             th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
           <td th:text="${narudzbenica.poslovnaGodina.godinaPoslovanja}">Broj narudzbenice</td>
           <td th:text="${narudzbenica.poslovniPartner.nazivPoslovnogPartnera}">Poslovni partner</td>
-          <td><a class="btn btn-primary"
-                 th:href="@{'/narudzbenice/azuriraj/' + ${narudzbenica.id}}"
-                 role="button">Azuriraj</a></td>
+
         </tr>
         </tbody>
       </table>
@@ -44,32 +41,9 @@
         <tr>
           <th>Broj narudzbenice</th>
           <th>Poslovni partner</th>
-          <th>Azuriraj</th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        <tr th:each="narudzbenica, rowStat: ${narudzbeniceFilter}"
-            th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
-          <td th:text="${narudzbenica.brojNarudzbenice}">Broj narudzbenice</td>
-          <td th:text="${narudzbenica.poslovniPartner.nazivPoslovnogPartnera}">Poslovni partner</td>
-          <td><a class="btn btn-primary"
-                 th:href="@{'/narudzbenice/azuriraj/' + ${narudzbenica.id}}"
-                 role="button">Azuriraj</a></td>
-        </tr>
-        </tbody>
-      </table>
-      <a class="btn btn-primary" th:href="@{'/narudzbenica/dodavanje/'+ ${tipNarudzbenice}}"
-         role="button">Dodaj narudzbenicu</a>
-    </div>
-    <div th:if="${tipNarudzbenice == 1}">
-      <table id="customerTable" class="table">
-        <thead>
-        <tr>
-          <th>Broj narudzbenice</th>
-          <th>Poslovni partner</th>
-          <th>Azuriraj</th>
+          <th>Detalji narudzbenice</th>
+          <th>Kreiraj otpremnicu</th>
+          <th>Kreiraj fakturu</th>
         </tr>
         </thead>
         <tbody>
@@ -82,6 +56,41 @@
           <td><a class="btn btn-primary"
                  th:href="@{'/narudzbenica/detalji/' + ${narudzbenica.id}}"
                  role="button">Detalji narudzbenice</a></td>
+          <td><a class="btn btn-primary"
+                 th:href="@{'/narudzbenica/kreirajOtpremnicu/' + ${narudzbenica.id}}"
+                 role="button">Kreiraj otpremnicu</a></td>
+          td><a class="btn btn-primary"
+                th:href="@{'/narudzbenica/kreirajFakturu/' + ${narudzbenica.id}}"
+                role="button">Kreiraj fakturu</a></td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="btn btn-primary" th:href="@{'/narudzbenica/dodavanje/'+ ${tipNarudzbenice}}"
+         role="button">Dodaj narudzbenicu</a>
+    </div>
+    <div th:if="${tipNarudzbenice == 1}">
+      <table id="customerTable" class="table">
+        <thead>
+        <tr>
+          <th>Broj narudzbenice</th>
+          <th>Poslovni partner</th>
+          <th>Detalji narudzbenice</th>
+          <th>Kreiraj fakturu</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        <tr th:each="narudzbenica, rowStat: ${narudzbeniceFilter}"
+            th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+          <td th:text="${narudzbenica.brojNarudzbenice}">Broj narudzbenice</td>
+          <td th:text="${narudzbenica.poslovniPartner.nazivPoslovnogPartnera}">Poslovni partner</td>
+          <td><a class="btn btn-primary"
+                 th:href="@{'/narudzbenica/detalji/' + ${narudzbenica.id}}"
+                 role="button">Detalji narudzbenice</a></td>
+          <td><a class="btn btn-primary"
+                 th:href="@{'/narudzbenica/kreirajFakturu/' + ${narudzbenica.id}}"
+                 role="button">Kreiraj fakturu</a></td>
         </tr>
         </tbody>
       </table>

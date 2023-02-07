@@ -44,7 +44,7 @@ public class StavkaFakture {
 	@JoinColumn(name = "roba_id")
 	private Roba roba;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "faktura_id")
 	private Faktura faktura;
 

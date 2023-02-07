@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org">
+<head>
+  <div th:replace="template :: header"></div>
+  <title>Otpremnice</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container ">
+  <h1>Otpremnice</h1>
+  <div class="row col-md-12 table-responsive">
+
+    <table id="customerTable" class="table">
+      <thead>
+      <tr>
+        <th>Broj otpremnice</th>
+        <th>Kupac</th>
+        <th>Mesto</th>
+        <th>Detalji</th>
+        <th>Kreiraj fakturu</th>
+      </tr>
+      </thead>
+      <tbody>
+
+
+      <tr th:each="otpremnica, rowStat: ${otpremnice}"
+          th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
+        <td th:text="${otpremnica.brojOtpremnice} +'/'+ ${otpremnica.poslovnaGodina.godinaPoslovanja}">Broj narudzbenice</td>
+        <td th:text="${otpremnica.poslovniPartner.nazivPoslovnogPartnera}">Kupac</td>
+        <td th:text="${otpremnica.poslovniPartner.mesto.grad}">Mesto</td>
+        <td><a class="btn btn-primary"
+               th:href="@{'/otpremnica/detalji/' + ${otpremnica.id}}"
+               role="button">Detalji otpremnice</a></td>
+        <td><a class="btn btn-primary"
+               th:href="@{'/otpremnica/kreirajFakturu/' + ${otpremnica.id}}"
+               role="button">Kreiraj fakturu</a></td>
+
+      </tr>
+      </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{'/otpremnica/dodavanje'}"
+       role="button">Dodaj otpremnicu</a>
+
+  </div>
+  <div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

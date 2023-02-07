@@ -1,7 +1,6 @@
 package com.ftn.poslovnainformatika.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ftn.poslovnainformatika.model.Cenovnik;
+import com.ftn.poslovnainformatika.model.Faktura;
 import com.ftn.poslovnainformatika.model.Roba;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,17 +11,27 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StavkaCenovnikaDTO {
+public class StavkaFaktureDTO {
 
     private long id;
 
-    private float cena;
+    private double cena;
 
-    @JsonIgnore
-    private Cenovnik cenovnik;
+    private long kolicina;
 
-    @JsonIgnore
+    private double osnovicaPDV;
+
+    private double procenatPDV;
+
+    private double iznosPDV;
+
+    private double rabat;
+
+    private double ukupanIznos;
+
     private Roba roba;
+
+    private Faktura faktura;
 
     private boolean obrisano;
 }

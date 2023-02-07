@@ -8,4 +8,6 @@ public interface IStavkeCenovnikaService {
     List<StavkeCenovnika> findStavkeCenovnikaByCenovnikId(long id);
 
     void save(StavkeCenovnika stavka);
+
+    List<StavkeCenovnika> findStavkeCenovnikaByRobaId(long id);
 }

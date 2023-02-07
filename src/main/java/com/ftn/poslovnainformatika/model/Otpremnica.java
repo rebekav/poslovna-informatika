@@ -53,7 +53,7 @@ public class Otpremnica {
 	@OneToMany(mappedBy = "otpremnica", cascade = CascadeType.ALL)
 	private Set<StavkaOtpremnice> stavkeOtpremnice = new HashSet<>();
 
-	@OneToMany(mappedBy = "otpremnica", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "otpremnica", cascade = CascadeType.MERGE)
 	private Set<Faktura> fakture = new HashSet<>();
 
 	private boolean obrisano;

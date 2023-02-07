@@ -42,7 +42,7 @@ public class Narudzbenica {
 	@OneToMany(mappedBy = "narudzbenica", cascade = CascadeType.ALL)
 	private Set<Otpremnica> otpremnice = new HashSet<>();
 
-	@OneToMany(mappedBy = "narudzbenica", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "narudzbenica", cascade = CascadeType.MERGE)
 	private Set<Faktura> fakture = new HashSet<>();
 
 	private boolean obrisano;

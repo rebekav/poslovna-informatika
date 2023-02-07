@@ -1,7 +1,7 @@
 package com.ftn.poslovnainformatika.controller;
 
 import com.ftn.poslovnainformatika.dto.NarudzbenicaDTO;
-import com.ftn.poslovnainformatika.mapper.NarudzbenicaDtoToNarudzbenica;
+import com.ftn.poslovnainformatika.mapper.NarudzbenicaDTOToNarudzbenica;
 import com.ftn.poslovnainformatika.mapper.NarudzbenicaToNarudzbenicaDTO;
 import com.ftn.poslovnainformatika.mapper.PoslovniPartnerToPoslovniPartnerDTO;
 import com.ftn.poslovnainformatika.mapper.RobaToRobaDTO;
@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 public class NarudzbenicaController {
 
     @Autowired
+    IOtpremnicaService otpremnicaService;
+
+    @Autowired
     IPoslovnaGodinaService poslovnaGodinaService;
 
     @Autowired
@@ -42,7 +45,7 @@ public class NarudzbenicaController {
     IRobaService robaService;
 
     @Autowired
-    NarudzbenicaDtoToNarudzbenica narudzbenicaDTOToNarudzbenica;
+    NarudzbenicaDTOToNarudzbenica narudzbenicaDTOToNarudzbenica;
 
     @Autowired
     NarudzbenicaToNarudzbenicaDTO narudzbenicaToNarudzbenicaDTO;
@@ -115,11 +118,30 @@ public class NarudzbenicaController {
         List<StavkaNarudzbenice> stavkeNarudzbenice = stavkaNarudzbeniceService.findAll().stream()
                 .filter(sn -> sn.getNarudzbenica().getId() == idNarudzbenice)
                 .collect(Collectors.toList());
-        model.addAttribute("narudzbenica", narudzbenicaToNarudzbenicaDTO.konvertujEntityToDto(narudzbenica));
+        NarudzbenicaDTO dto = narudzbenicaToNarudzbenicaDTO.konvertujEntityToDto(narudzbenica);
+        model.addAttribute("narudzbenica", dto);
         model.addAttribute("robe", robe);
         model.addAttribute("stavkeNarudzbenice", stavkeNarudzbenice);
         model.addAttribute("poslovniPartner", poslovniPartnerToPoslovniPartnerDTO.konvertujEntityToDto(narudzbenica.getPoslovniPartner()));
         return "narudzbenica_detalji";
+    }
+
+    @GetMapping("/narudzbenica/kreirajOtpremnicu/{idNaruzbenice}")
+    public String kreirajOtpremnicuOdNarudzbenice(Model model, @PathVariable long idNaruzbenice) {
+        Narudzbenica narudzbenica = narudzbenicaService.getOne(idNaruzbenice);
+        otpremnicaService.kreirajOtpremnicuOdNaruzbenice(narudzbenica);
+        return "redirect:/narudzbenice";
+    }
+
+    @GetMapping("/narudzbenica/kreirajFakturu/{idNaruzbenice}")
+    public String kreirajFakturuOdNarudzbenice(Model model, @PathVariable long idNaruzbenice) {
+        PoslovnaGodina poslovnaGodina = poslovnaGodinaService.findByZakljucenaGodinaIsFalseAndObrisanoIsFalse().get(0);
+        int poslednjaPoslovnjaGodina = poslovnaGodina.getFakture().size();
+
+        Narudzbenica narudzbenica = narudzbenicaService.getOne(idNaruzbenice);
+        NarudzbenicaDTO narudzbenicaDTO = narudzbenicaToNarudzbenicaDTO.konvertujEntityToDto(narudzbenica);
+        narudzbenicaService.kreirajFakturuOdNarudzbenice(narudzbenicaDTO, poslednjaPoslovnjaGodina);
+        return "redirect:/narudzbenice";
     }
 
 }

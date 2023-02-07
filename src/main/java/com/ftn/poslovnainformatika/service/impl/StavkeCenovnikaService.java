@@ -28,6 +28,13 @@ public class StavkeCenovnikaService implements IStavkeCenovnikaService {
 
     }
 
+    @Override
+    public List<StavkeCenovnika> findStavkeCenovnikaByRobaId(long id) {
+        return stavkaCenovnikaRepository.findAll().stream()
+                .filter(sc -> sc.getRoba().getId() == id)
+                .collect(Collectors.toList());
+    }
+
 
 
 }

@@ -66,11 +66,11 @@ public class Faktura {
 	@JoinColumn(name = "preduzece_id")
 	private Preduzece preduzece;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "narudzbenica_id")
 	private Narudzbenica narudzbenica;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "otpremnica_id")
 	private Otpremnica otpremnica;
 

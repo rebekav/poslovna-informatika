@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http/www.thymeleaf.org" >
+<head>
+    <div th:replace="template :: header"></div>
+    <title>Dodaj otpremnicu</title>
+</head>
+
+<body>
+<div th:insert="template :: navbar"></div>
+<div class="container text-center">
+    <div>
+        <h1>Dodaj otpremnicu</h1>
+    </div>
+    <form th:action="@{/otpremnica/dodavanje}" th:method="POST"
+          style="max-width: 600px; margin: 0 auto"
+          th:object="${otpremnica}">
+
+
+        <div class="form-group row">
+            <label class="col-form-label col-4">Kupci</label>
+            <div class=col-8>
+                <select th:field="*{poslovniPartner}" class="form-control">
+
+
+                    <option th:each="poslovniPartner : ${listaPoslovnihPartnera}" th:value="${poslovniPartner.id}"
+                            th:text="${poslovniPartner.nazivPoslovnogPartnera}" th:selected="${tipNarudzbenice}"></option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Dodaj</button>
+        </div>
+    </form>
+</div>
+<div th:replace="template :: scriptFrag"></div>
+</body>
+</html>

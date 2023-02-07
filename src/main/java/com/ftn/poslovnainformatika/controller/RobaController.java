@@ -2,14 +2,14 @@ package com.ftn.poslovnainformatika.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ftn.poslovnainformatika.dto.RobaDTO;
-import com.ftn.poslovnainformatika.mapper.GrupaRobeDTOToGrupaRobe;
-import com.ftn.poslovnainformatika.mapper.GrupaRobeToGrupaRobeDTO;
-import com.ftn.poslovnainformatika.mapper.RobaDTOToRoba;
-import com.ftn.poslovnainformatika.mapper.RobaToRobaDTO;
+import com.ftn.poslovnainformatika.dto.StavkaCenovnikaDTO;
+import com.ftn.poslovnainformatika.mapper.*;
 import com.ftn.poslovnainformatika.model.GrupaRobe;
 import com.ftn.poslovnainformatika.model.Roba;
+import com.ftn.poslovnainformatika.model.StavkeCenovnika;
 import com.ftn.poslovnainformatika.service.IGrupaRobeService;
 import com.ftn.poslovnainformatika.service.IRobaService;
+import com.ftn.poslovnainformatika.service.IStavkeCenovnikaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +19,12 @@ import java.util.List;
 
 @Controller
 public class RobaController {
+
+    @Autowired
+    IStavkeCenovnikaService stavkeCenovnikaService;
+
+    @Autowired
+    private StavkaCenovnikaToStavkaCenovnikaDTO stavkaCenovnikaToStavkaCenovnikaDTO;
 
     @Autowired
     private IRobaService robaService;
@@ -94,6 +100,17 @@ public class RobaController {
         List<GrupaRobe> listaGrupeRobe = grupaRobeService.findAll();
         model.addAttribute("roba", robaDTO);
         model.addAttribute("listaGrupeRobe", grupaRobeToGrupaRobeDTO.konvertujEntityToDto(listaGrupeRobe));
+    }
+
+    @GetMapping("/roba/cena/{id}")
+    @JsonIgnore
+    public @ResponseBody StavkaCenovnikaDTO getCena(@PathVariable("id") long id) {
+        List<StavkeCenovnika> stavkeCenovnika = stavkeCenovnikaService.findStavkeCenovnikaByRobaId(id);
+        if(stavkeCenovnika.size() > 0) {
+            List<StavkaCenovnikaDTO> stavke = stavkaCenovnikaToStavkaCenovnikaDTO.konvertujEntityToDto(stavkeCenovnika);
+            return stavke.get(0);
+        }
+        return null;
     }
 
 }

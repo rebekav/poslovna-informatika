@@ -5,3 +5,19 @@ body {
 .card-body {
 	background-color: #F0FFFF;
 }
+
+#rezultat-div {
+	margin-left: 87%;
+	padding:10px;
+	background-color: #ffae42;
+
+}
+
+#iznos-label {
+	margin-left: 87%;
+	width: 20%;
+	float: right;
+	margin-top: -50px;
+	padding: 10px;
+	background-color: #d3d3d3;
+}

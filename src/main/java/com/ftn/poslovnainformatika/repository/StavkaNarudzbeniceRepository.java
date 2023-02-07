@@ -1,6 +1,7 @@
 package com.ftn.poslovnainformatika.repository;
 
 import com.ftn.poslovnainformatika.model.StavkaNarudzbenice;
+import com.ftn.poslovnainformatika.model.StavkaOtpremnice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,5 +14,11 @@ public interface StavkaNarudzbeniceRepository extends JpaRepository<StavkaNarudz
 
     @Query("FROM StavkaNarudzbenice sn where sn.narudzbenica = :narudzbenica")
     List<StavkaNarudzbenice> findAllByNarudzbenicaId(@Param("narudzbenica") Long narudzbenica);
+
+    @Query("select e from StavkaNarudzbenice e where e.obrisano=false")
+    List<StavkaNarudzbenice> findAllStavkeNarudzbenice();
+
+    @Query("select e from StavkaOtpremnice e where e.obrisano=false")
+    List<StavkaOtpremnice> findAllOtpremnice();
 
 }

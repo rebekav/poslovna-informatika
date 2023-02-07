@@ -24,7 +24,7 @@ public class StavkaNarudzbeniceService implements IStavkaNarudzbeniceService {
 
     @Override
     public List<StavkaNarudzbenice> findAll() {
-        return stavkaNarudzbeniceRepository.findAll();
+        return stavkaNarudzbeniceRepository.findAllStavkeNarudzbenice();
     }
 
 }
