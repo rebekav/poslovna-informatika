@@ -83,7 +83,9 @@
     </div>
 
 
-
+    <div>
+      <a class="btn btn-primary" th:href="@{'/faktura/pdf/' + ${faktura.id}}" role="button">Export PDF</a>
+    </div>
 
 
     <div th:replace="template :: scriptFrag"></div>
