@@ -2,7 +2,13 @@ package com.ftn.poslovnainformatika.pdfExporter;
 
 import com.ftn.poslovnainformatika.model.Faktura;
 import com.ftn.poslovnainformatika.model.StavkaFakture;
-import com.lowagie.text.Document;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import jakarta.servlet.http.HttpServletResponse;
+import com.lowagie.text.Font;
+
 
 import java.awt.*;
 import java.io.IOException;

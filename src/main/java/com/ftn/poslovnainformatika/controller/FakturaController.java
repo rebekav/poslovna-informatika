@@ -8,6 +8,7 @@ import com.ftn.poslovnainformatika.pdfExporter.PdfIzlaznaFakturaExporter;
 import com.ftn.poslovnainformatika.pdfExporter.PdfUlaznaFakturaExporter;
 import com.ftn.poslovnainformatika.service.IFakturaService;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
+import com.lowagie.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

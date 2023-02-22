@@ -19,6 +19,7 @@ import com.ftn.poslovnainformatika.service.IPoslovniPartnerService;
 import com.ftn.poslovnainformatika.service.IPreduzeceService;
 import com.ftn.poslovnainformatika.service.IRobaService;
 import com.ftn.poslovnainformatika.service.IStavkaOtpremniceService;
+import com.lowagie.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
