@@ -6,6 +6,7 @@ import com.ftn.poslovnainformatika.repository.FakturaRepository;
 import com.ftn.poslovnainformatika.service.IFakturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class FakturaService implements IFakturaService {
     FakturaRepository fakturaRepository;
 
     @Override
+    @Transactional(readOnly = false)
     public void update(Faktura faktura) {
         double ukupanPdv = 0;
         double ukupanIznos = 0;
@@ -41,17 +43,20 @@ public class FakturaService implements IFakturaService {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void save(Faktura faktura) {
         fakturaRepository.save(faktura);
 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Faktura> findAll() {
         return fakturaRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Faktura getOne(long idFakture) {
         return fakturaRepository.getOne(idFakture);
     }

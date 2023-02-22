@@ -1,17 +1,12 @@
 package com.ftn.poslovnainformatika.controller;
 
 import com.ftn.poslovnainformatika.dto.GrupaRobeDTO;
-import com.ftn.poslovnainformatika.mapper.GrupaRobeDTOToGrupaRobe;
-import com.ftn.poslovnainformatika.mapper.GrupaRobeToGrupaRobeDTO;
-import com.ftn.poslovnainformatika.mapper.PreduzeceToPreduzeceDTO;
-import com.ftn.poslovnainformatika.mapper.StopaPdvToStopaPdvDTO;
+import com.ftn.poslovnainformatika.mapper.*;
 import com.ftn.poslovnainformatika.model.GrupaRobe;
+import com.ftn.poslovnainformatika.model.Pdv;
 import com.ftn.poslovnainformatika.model.Preduzece;
 import com.ftn.poslovnainformatika.model.StopaPdv;
-import com.ftn.poslovnainformatika.service.IGrupaRobeService;
-import com.ftn.poslovnainformatika.service.IPreduzeceService;
-import com.ftn.poslovnainformatika.service.IRobaService;
-import com.ftn.poslovnainformatika.service.IStopaPdvService;
+import com.ftn.poslovnainformatika.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +22,7 @@ public class GrupaRobeController {
     private IGrupaRobeService grupaRobeService;
 
     @Autowired
-    private IStopaPdvService stopaPdvService;
+    private IPdvService pdvService;
 
     @Autowired
     private IPreduzeceService preduzeceService;
@@ -42,7 +37,7 @@ public class GrupaRobeController {
     private PreduzeceToPreduzeceDTO preduzeceToPreduzeceDTO;
 
     @Autowired
-    private StopaPdvToStopaPdvDTO stopaPdvToStopaPdvDTO;
+    private PdvToPdvDTO pdvToPdvDTO;
 
 
     @GetMapping("/grupaRobe")
@@ -89,10 +84,10 @@ public class GrupaRobeController {
 
     public void dodajAtributeUModel (Model model, GrupaRobeDTO grupaRobeDTO) {
         List<Preduzece> listaPreduzeca = preduzeceService.findAll();
-        List<StopaPdv> listaStopaPdv = stopaPdvService.findAll();
+        List<Pdv> listaPDV = pdvService.findAll();
         model.addAttribute("grupaRobe", grupaRobeDTO);
         model.addAttribute("listaPreduzeca", preduzeceToPreduzeceDTO.konvertujEntityToDto(listaPreduzeca));
-        model.addAttribute("listaStopaPdv", stopaPdvToStopaPdvDTO.konvertujEntityToDto(listaStopaPdv));
+        model.addAttribute("listaPdv", pdvToPdvDTO.konvertujEntityToDto(listaPDV));
     }
 
 }

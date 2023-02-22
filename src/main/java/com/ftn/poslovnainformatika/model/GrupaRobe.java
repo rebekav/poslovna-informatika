@@ -34,8 +34,8 @@ public class GrupaRobe {
 	private Preduzece preduzece;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "stopa_pdv_id")
-	private StopaPdv stopaPdv;
+	@JoinColumn(name = "pdv_id")
+	private Pdv pdv;
 
 	private boolean obrisano;
 

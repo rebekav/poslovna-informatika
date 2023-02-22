@@ -43,9 +43,6 @@ public class StopaPdv {
 	@JoinColumn(name = "pdv_id")
 	private Pdv pdv;
 
-	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "stopaPdv")
-	private Set<GrupaRobe> grupeRobe = new HashSet<>();
-
 	private boolean obrisano;
 
 }

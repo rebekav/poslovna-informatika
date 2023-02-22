@@ -18,6 +18,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Pdv {
@@ -27,8 +30,11 @@ public class Pdv {
 
 	private String vrstaPdv;
 
-	@OneToMany(mappedBy = "pdv", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pdv", cascade = ALL)
 	private Set<StopaPdv> stopePdv = new HashSet<>();
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "pdv")
+	private Set<GrupaRobe> grupeRobe = new HashSet<>();
 
 	private boolean obrisano;
 

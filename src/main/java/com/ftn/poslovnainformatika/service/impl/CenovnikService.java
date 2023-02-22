@@ -5,10 +5,12 @@ import com.ftn.poslovnainformatika.repository.CenovnikRepository;
 import com.ftn.poslovnainformatika.service.ICenovnikService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CenovnikService implements ICenovnikService {
 
     @Autowired

@@ -4,9 +4,12 @@ import com.ftn.poslovnainformatika.model.StavkaNarudzbenice;
 import com.ftn.poslovnainformatika.repository.StavkaNarudzbeniceRepository;
 import com.ftn.poslovnainformatika.service.IStavkaNarudzbeniceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Service
+@Transactional
 public class StavkaNarudzbeniceService implements IStavkaNarudzbeniceService {
 
     @Autowired

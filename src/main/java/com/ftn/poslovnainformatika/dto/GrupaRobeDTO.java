@@ -1,5 +1,6 @@
 package com.ftn.poslovnainformatika.dto;
 
+import com.ftn.poslovnainformatika.model.Pdv;
 import com.ftn.poslovnainformatika.model.Preduzece;
 import com.ftn.poslovnainformatika.model.StopaPdv;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,7 @@ public class GrupaRobeDTO {
 
     private Preduzece preduzece;
 
-    private StopaPdv stopaPdv;
+    private Pdv pdv;
 
     private boolean obrisano;
 

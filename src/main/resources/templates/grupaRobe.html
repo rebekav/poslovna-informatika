@@ -24,7 +24,6 @@
             <tr>
                 <th>Naziv grupe</th>
                 <th>PDV</th>
-                <th>Stopa pdv</th>
                 <th></th>
             </tr>
             </thead>
@@ -32,8 +31,7 @@
             <tr th:each="grupaRobe, rowStat: ${listaGrupaRobe}"
                 th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
                 <td th:text="${grupaRobe.naziv}">Naziv grupe</td>
-                <td th:text="${grupaRobe.stopaPdv.pdv.vrstaPdv}">PDV</td>
-                <td th:text="${grupaRobe.stopaPdv.procenat} + ' %'">Stopa pdv</td>
+                <td th:text="${grupaRobe.pdv.vrstaPdv}">PDV</td>
                 <td><a class="btn btn-primary"
                        th:href="@{'/grupaRobe/azuriraj/' + ${grupaRobe.Id}}" role="button">Azuriraj</a>
                 </td>

@@ -5,10 +5,12 @@ import com.ftn.poslovnainformatika.repository.StavkaFaktureRepository;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StavkeFaktureService implements IStavkeFakture {
 
     @Autowired

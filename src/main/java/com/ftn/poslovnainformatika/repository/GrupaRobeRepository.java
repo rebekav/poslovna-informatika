@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface GrupaRobeRepository extends JpaRepository<GrupaRobe, Long>{
 
-    List<GrupaRobe> findByStopaPdvId(Long stopaPdvId);
+    public List<GrupaRobe> findByPdvId(Long pdvId);
 
 }

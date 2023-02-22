@@ -10,6 +10,7 @@ import com.ftn.poslovnainformatika.service.INarudzbenicaService;
 import com.ftn.poslovnainformatika.service.IOtpremnicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -33,22 +34,26 @@ public class OtpremnicaService implements IOtpremnicaService {
     ICenovnikService cenovnikService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Otpremnica> findAll() {
         return otpremnicaRepository.findAllOtpremnice();
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void save(Otpremnica otpremnica) {
         otpremnicaRepository.save(otpremnica);
 
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Otpremnica getOne(long idotpremnice) {
         return otpremnicaRepository.getOne(idotpremnice);
     }
 
     @Override
+    @Transactional
     public void kreirajOtpremnicuOdNaruzbenice(Narudzbenica narudzbenica) {
         List<Otpremnica> listaOtpremnica = otpremnicaRepository.findAll();
 
@@ -113,6 +118,7 @@ public class OtpremnicaService implements IOtpremnicaService {
     }
 
     @Override
+    @Transactional
     public void update(Otpremnica otpremnica) {
         double ukupanIznos = 0;
 
@@ -127,6 +133,7 @@ public class OtpremnicaService implements IOtpremnicaService {
     }
 
     @Override
+    @Transactional
     public void kreirajFakturuOdOtpremnice(OtpremnicaDTO otpremnicaDTO, int brojFakture) {
         Otpremnica otpremnica = otpremnicaDTOToOtpremnica.konvertujDtoToEntity(otpremnicaDTO);
         otpremnica.setObrisano(true);
@@ -150,14 +157,18 @@ public class OtpremnicaService implements IOtpremnicaService {
         Set<StavkaFakture> stavke = new HashSet<>();
 
         for(StavkaOtpremnice so : stavkeOtpremnice) {
+
+            Set<StopaPdv> stopePDva = so.getRoba().getGrupaRobe().getPdv().getStopePdv();
+            StopaPdv stopaPdv = stopePDva.stream()
+                    .filter(sp -> sp.getRokVazenja().after(new Date())).findFirst().get();
             StavkaFakture stavkaFakture = new StavkaFakture();
-            stavkaFakture.setIznosPDV(so.getUkupanIznos()* (so.getRoba().getGrupaRobe().getStopaPdv().getProcenat() / 100));
-            stavkaFakture.setProcenatPDV(so.getRoba().getGrupaRobe().getStopaPdv().getProcenat());
+            stavkaFakture.setIznosPDV(so.getUkupanIznos()* (stopaPdv.getProcenat() / 100));
+            stavkaFakture.setProcenatPDV(stopaPdv.getProcenat());
             stavkaFakture.setCena(so.getCena());
             stavkaFakture.setKolicina(so.getKolicina());
             stavkaFakture.setOsnovicaPDV(so.getUkupanIznos());
             stavkaFakture.setRabat(0);
-            stavkaFakture.setUkupanIznos(so.getUkupanIznos() * (1+(so.getRoba()).getGrupaRobe().getStopaPdv().getProcenat() / 100));
+            stavkaFakture.setUkupanIznos(so.getUkupanIznos() * (1+(stopaPdv.getProcenat() / 100)));
             stavkaFakture.setObrisano(false);
             stavkaFakture.setRoba(so.getRoba());
 

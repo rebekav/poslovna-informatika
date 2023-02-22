@@ -2,7 +2,7 @@
 <html xmlns:th="http/www.thymeleaf.org" >
 <head>
   <div th:replace="template :: header"></div>
-  <title>Narudzbenice</title>
+  <title>Fakture - detalji</title>
 
 </head>
 
@@ -15,7 +15,7 @@
       <div class="col-md-6 my-3">
         <div class="card" style="height:100%">
           <div class="card-body">
-            <h5><b>Faktura</b></h5>
+            <h5><b>Fakture</b></h5>
             <div class="col-md my-3">
               <p class="card-text p-y-1">Broj: <span th:text="${faktura.brojFakture}"></span></p>
               <p class="card-text p-y-1">Datum fakture: <span th:text="${faktura.datumFakture}"></span></p>

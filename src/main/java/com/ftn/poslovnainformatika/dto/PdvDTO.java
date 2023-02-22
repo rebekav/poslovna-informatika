@@ -22,6 +22,8 @@ public class PdvDTO {
 
     private Set<StopaPdv> stopePdv = new HashSet<>();
 
+    private Set<GrupaRobe> grupeRobe = new HashSet<>();
+
     private boolean obrisano;
 
 }

@@ -6,10 +6,12 @@ import com.ftn.poslovnainformatika.service.IGrupaRobeService;
 import com.ftn.poslovnainformatika.service.IStopaPdvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class StopaPdvService implements IStopaPdvService {
 
     @Autowired
@@ -43,7 +45,6 @@ public class StopaPdvService implements IStopaPdvService {
     @Override
     public void izbrisiStopuPdv(StopaPdv stopaPdv) {
         stopaPdv.setObrisano(true);
-        grupaRobeService.izbrisiGrupuRobeByStopaPdvId(stopaPdv.getId());
         stopaPdvRepository.save(stopaPdv);
     }
 

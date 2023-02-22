@@ -15,7 +15,6 @@
       <thead>
       <tr>
         <th>Datum vazenja od</th>
-        <th>Datum vazenja do</th>
         <th>Poslovni partner</th>
         <th>Detalji</th>
       </tr>
@@ -25,7 +24,6 @@
         <tr th:each="cenovnik, rowStat: ${cenovnici}"
             th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
           <td th:text="${cenovnik.pocetakRokaTrajanja}">Datum vazenja od</td>
-          <td th:text="${cenovnik.krajRokaTrajanja}">Datum vazenja do</td>
           <td th:text="${cenovnik.poslovniPartner.nazivPoslovnogPartnera}">Poslovni partner</td>
           <td><a class="btn btn-primary"
                  th:href="@{'/cenovnik/detalji/' + ${cenovnik.id}}"

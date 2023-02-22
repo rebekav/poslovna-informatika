@@ -2,19 +2,34 @@
 <html xmls:th="http/www.thymeleaf.org">
 <head>
   <div th:replace="template :: header"></div>
-  <title>Fakture</title>
+  <title>Knjige faktura</title>
 </head>
 
 <body>
 <div th:insert="template :: navbar"></div>
 <div class="container ">
-  <h1>Fakture</h1>
-  <div class="row col-md-12 table-responsive">
-    <a class="btn btn-primary"
-       th:href="@{'/fakture?tipFakture=false'}"
-       role="button" id="ulazneFakture">Ulazne fakture</a> <a class="btn btn-warning"
-                                                              th:href="@{'/fakture?tipFakture=true'}"
-                                                              role="button" id="izlazneFakture">Izlazne fakture</a>
+  <h1>Knjiga izlaznih faktura</h1>
+  <div>
+    <h1 th:if="${pocetak!=null}" th:text="'u periodu od ' + ${pocetak} + ' do ' + ${kraj}"></h1>
+  </div>
+  <form th:action="@{/prikaziKnjiguFaktura}" method="post"
+        style="max-width: 600px; margin: 0 auto">
+    <input
+            id="tipFakture" type="text"
+            th:value="true"
+            name="tipFakture" hidden />
+    <input
+            id="startDate" type="date"
+            th:value="${pocetak}"
+            name="startDate" />
+    <input
+            id="endDate" type="date"
+            th:value="${kraj}"
+            name="endDate" />
+    <div>
+      <input type="submit" name="search" class="button btn-primary" value="Pretraga po datumu" />
+    </div>
+
 
     <table id="customerTable" class="table">
       <thead>
@@ -25,6 +40,7 @@
         <th>Datum valute</th>
         <th>Mesto</th>
         <th>Ukupan iznos fakture</th>
+        <th>PDF izvestaj</th>
       </tr>
       </thead>
       <tbody>
@@ -38,7 +54,9 @@
         <td th:text="${faktura.datumValute}">Datum valute</td>
         <td th:text="${faktura.poslovniPartner.mesto.grad}">Mesto</td>
         <td th:text="${faktura.iznosZaPlacanje}">Ukupan iznos fakture</td>
-
+        <td><a class="btn btn-primary"
+               th:href="@{'/pdfFakture/' + ${faktura.id}}"
+               role="button">PDF izvestaj</a></td>
         <td><a class="btn btn-primary"
                th:href="@{'/faktura/detalji/' + ${faktura.id}}"
                role="button">Detalji fakture</a></td>
@@ -48,10 +66,9 @@
       </tbody>
     </table>
 
-
-
-
-  </div>
+    <input type="submit" name="print" class="btn-primary" value="PDF knjiga faktura" />
+  </form>
+</div>
 </div>
 <div th:replace="template :: scriptFrag"></div>
 </body>

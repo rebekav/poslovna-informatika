@@ -5,10 +5,12 @@ import com.ftn.poslovnainformatika.repository.PdvRepository;
 import com.ftn.poslovnainformatika.service.IPdvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class PdvService implements IPdvService {
 
     @Autowired

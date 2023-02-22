@@ -9,6 +9,7 @@ import com.ftn.poslovnainformatika.service.IFakturaService;
 import com.ftn.poslovnainformatika.service.INarudzbenicaService;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.*;
@@ -32,11 +33,13 @@ public class NarudzbenicaService implements INarudzbenicaService {
     NarudzbenicaRepository narudzbenicaRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Narudzbenica> findAll() {
         return narudzbenicaRepository.findAllNarudzbenice();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Narudzbenica getOne(long id) {
         return narudzbenicaRepository.getOne(id);
     }
@@ -49,6 +52,7 @@ public class NarudzbenicaService implements INarudzbenicaService {
     }
 
     @Override
+    @Transactional
     public void kreirajFakturuOdNarudzbenice(NarudzbenicaDTO narudzbenicaDTO, int poslednjaPoslovnjaGodina) {
         Narudzbenica narudzbenica = narudzbenicaDTOToNarudzbenica.konvertujDtoToEntity(narudzbenicaDTO);
         narudzbenica.setObrisano(true);
@@ -104,16 +108,21 @@ public class NarudzbenicaService implements INarudzbenicaService {
 
                 if(sc.getRoba().getId() == sn.getRoba().getId()) {
 
+
+                    Set<StopaPdv> stopePDva = sn.getRoba().getGrupaRobe().getPdv().getStopePdv();
+                    StopaPdv stopaPdv = stopePDva.stream()
+                            .filter(sp -> sp.getRokVazenja().after(new Date())).findFirst().get();
+
                     StavkaFakture novaStavkaFakture = new StavkaFakture();
-                    novaStavkaFakture.setIznosPDV(sc.getCena() * sn.getKolicina() * (sn.getRoba().getGrupaRobe().getStopaPdv().getProcenat() / 100));
-                    novaStavkaFakture.setUkupanIznos(sc.getCena() * sn.getKolicina() * (1+(sn.getRoba().getGrupaRobe().getStopaPdv().getProcenat() / 100)));
+                    novaStavkaFakture.setIznosPDV(sc.getCena() * sn.getKolicina() * (stopaPdv.getProcenat() / 100));
+                    novaStavkaFakture.setUkupanIznos(sc.getCena() * sn.getKolicina() * (1+(stopaPdv.getProcenat() / 100)));
                     novaStavkaFakture.setCena(sc.getCena());
                     novaStavkaFakture.setKolicina(sn.getKolicina());
                     novaStavkaFakture.setOsnovicaPDV(sc.getCena() * sn.getKolicina());
                     novaStavkaFakture.setObrisano(false);
                     novaStavkaFakture.setRabat(0);
                     novaStavkaFakture.setRoba(sn.getRoba());
-                    novaStavkaFakture.setProcenatPDV(sn.getRoba().getGrupaRobe().getStopaPdv().getProcenat());
+                    novaStavkaFakture.setProcenatPDV(stopaPdv.getProcenat());
                     novaStavkaFakture.setFaktura(faktura);
                     nadjeneStavke.add(novaStavkaFakture);
                 }

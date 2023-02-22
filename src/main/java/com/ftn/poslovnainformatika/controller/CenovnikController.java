@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CenovnikController {
@@ -76,6 +80,14 @@ public class CenovnikController {
     @PostMapping("cenovnik/dodavanje")
     public String dodajCenovnik(CenovnikDTO cenovnikDto) {
         List<Preduzece> preduzeca = preduzeceService.findAll();
+        List<Cenovnik> listaCenovnika = cenovnikService.findAll().stream()
+                .filter(c -> c.getPoslovniPartner().getId() == cenovnikDto.getPoslovniPartner().getId())
+                .collect(Collectors.toList());
+        for(Cenovnik c: listaCenovnika) {
+            c.setKrajRokaTrajanja(new Date(Calendar.getInstance().getTimeInMillis()));
+            c.setObrisano(true);
+            cenovnikService.save(c);
+        }
         Cenovnik cenovnik = cenovnikDTOCenovnik.konvertujDtoToEntity(cenovnikDto);
         cenovnik.setPreduzece(preduzeca.get(0));
         cenovnik.setObrisano(false);

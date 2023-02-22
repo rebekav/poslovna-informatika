@@ -33,12 +33,12 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-form-label col-4">Stopa PDV</label>
+                <label class="col-form-label col-4">PDV</label>
                 <div class=col-8>
-                    <select name="stopaPdv" id="stopaPdv" class="form-control"
-                            th:field="*{stopaPdv}">
-                        <option th:each="stopaPdv : ${listaStopaPdv}"
-                                th:value="${stopaPdv.id}" th:text="${stopaPdv.pdv.vrstaPdv} + ' (' + ${stopaPdv.procenat} + ' %)'"></option>
+                    <select name="pdv" id="pdv" class="form-control"
+                            th:field="*{pdv}">
+                        <option th:each="pdv : ${listaPdv}"
+                                th:value="${pdv.id}" th:text="${pdv.vrstaPdv}"></option>
                     </select>
                 </div>
             </div>

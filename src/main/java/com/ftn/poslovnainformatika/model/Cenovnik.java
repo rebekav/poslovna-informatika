@@ -20,9 +20,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Where(clause = "obrisano='false'")
 public class Cenovnik {
 
 	@Id

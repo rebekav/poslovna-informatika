@@ -6,10 +6,12 @@ import com.ftn.poslovnainformatika.service.IGrupaRobeService;
 import com.ftn.poslovnainformatika.service.IRobaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class GrupaRobeService implements IGrupaRobeService {
 
     @Autowired
@@ -48,8 +50,8 @@ public class GrupaRobeService implements IGrupaRobeService {
     }
 
     @Override
-    public void izbrisiGrupuRobeByStopaPdvId(Long stopaPdvId) {
-        List<GrupaRobe> listaGrupeRobe = grupaRobeRepository.findByStopaPdvId(stopaPdvId);
+    public void izbrisiGrupuRobeByPdvId(Long pdvId) {
+        List<GrupaRobe> listaGrupeRobe = grupaRobeRepository.findByPdvId(pdvId);
         for (GrupaRobe grupaRobe : listaGrupeRobe) {
             izbrisiGrupuRobe(grupaRobe);
         }
