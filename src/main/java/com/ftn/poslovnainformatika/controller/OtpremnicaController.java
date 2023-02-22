@@ -104,12 +104,14 @@ public class OtpremnicaController {
         return "redirect:/otpremnice";
     }
 
-    @GetMapping("otpremnica/detalji/{otpremnicaId}")
-    public String detaljiNarudzbenice(Model model, @PathVariable long otpremnicaId) {
-        Otpremnica otpremnica = otpremnicaService.getOne(otpremnicaId);
-        List<Roba> robe = robaService.findAll();
+    @GetMapping("otpremnica/detalji/{idotpremnice}")
+    public String detaljiNarudzbenice(Model model, @PathVariable long idotpremnice) {
+        Otpremnica otpremnica = otpremnicaService.getOne(idotpremnice);
+        List<Roba> robe = robaService.findAll().stream()
+                .filter(rb -> rb.getStavkeCenovnika().size() > 0)
+                .collect(Collectors.toList());
         List<StavkaOtpremnice> stavkaOtpremnice = stavkaOtpremniceService.findAll().stream()
-                .filter(so -> so.getOtpremnica().getId() == otpremnicaId)
+                .filter(so -> so.getOtpremnica().getId() == idotpremnice)
                 .collect(Collectors.toList());
         model.addAttribute("otpremnica", otpremnicaToOtpremnicaDTO.konvertujEntityToDto(otpremnica));
         model.addAttribute("robe", robe);

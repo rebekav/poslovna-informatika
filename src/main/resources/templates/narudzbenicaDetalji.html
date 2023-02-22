@@ -49,7 +49,7 @@
             <th>Naziv robe</th>
             <th>Jedinica mere</th>
             <th>Kolicina</th>
-            <th></th>
+            <th>Obrisi stavku</th>
           </tr>
           </thead>
           <tbody>
@@ -58,6 +58,9 @@
             <td th:text="${stavka.opis}">Naziv robe</td>
             <td th:text="${stavka.jedinicaMere}">Jedinica mere</td>
             <td th:text="${stavka.kolicina}">Kolicina</td>
+            <td><a class="btn btn-danger"
+                   th:href="@{'/stavkaNarudzbenice/obrisi/' + ${stavka.id} + '/' + ${narudzbenica.id}}"
+                   role="button">Obrisi stavku</a></td>
           </tr>
           </tbody>
         </table>
@@ -95,28 +98,9 @@
           <button type="button" class="btn btn-warning" data-dismiss="modal">Otkazi</button>
         </div>
       </div>
-
     </div>
   </div>
-
-
-  <div class="modal" tabindex="-1" role="dialog" id="delete_stavka">
-    <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-mercator">
-          <h5 class="modal-title ">Brisanaje stavke</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body" id="delete_content"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="delete_confirm">Obrisi</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Odustani</button>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
   <div th:replace="template :: scriptFrag"></div>
   <script  th:src="@{/js/narudzbenica.js}"></script>

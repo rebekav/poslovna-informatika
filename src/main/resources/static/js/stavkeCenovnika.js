@@ -8,12 +8,6 @@ $("#addStavkaCenovnika").click(function(e){
 
 
         var cenovnikid = $('.cenovnikId').val();
-        var stavkeCenovnika = {
-            cenovnikId: cenovnikid,
-            cena: cena,
-            robaId: roba
-
-        }
         $.ajax({url: '/stavkeCenovnika',
             dataType: 'json',
             contentType:'application/json',

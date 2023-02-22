@@ -9,6 +9,15 @@
 <div th:insert="template :: navbar"></div>
 <div class="container ">
     <h1>Artikli robe</h1>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1"><i
+                        class="fa fa-search"></i></span>
+        </div>
+        <input id="search" type="text" class="form-control"
+               placeholder="Pretraga..." aria-label="Search"
+               aria-describedby="basic-addon1">
+    </div>
     <div class="row col-md-12 table-responsive">
         <table id="customerTable" class="table">
             <thead>
@@ -19,7 +28,7 @@
                 <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody  class="searchTable">
             <tr th:each="roba, rowStat: ${listaRobe}"
                 th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
                 <td th:text="${roba.nazivRobe}">Naziv robe</td>
@@ -36,5 +45,6 @@
     </div>
 </div>
 <div th:replace="template :: scriptFrag"></div>
+<script th:src="@{/js/search.js}"></script>
 </body>
 </html>

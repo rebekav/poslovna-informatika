@@ -17,16 +17,16 @@ INSERT INTO `poslovnainformatikadb`.pdv (vrsta_pdv,obrisano) VALUES ('Poseban',f
 INSERT INTO `poslovnainformatikadb`.stopa_pdv (rok_vazenja,obrisano,procenat,pdv_id) VALUES ('2022-01-31 07:07:07.000',0,21,1);
 INSERT INTO `poslovnainformatikadb`.stopa_pdv (rok_vazenja,obrisano,procenat,pdv_id) VALUES ('2022-12-12 07:07:07.000',0,8,2);
 
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('bela tehnika',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('kucni aparati',0,1,2);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('klima uredjaji',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('TV',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Muzicki uredjaji',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Racunari',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Kamere',0,1,1);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Fotoaparati',0,1,2);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Telefoni',0,1,2);
-INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, pdv_id) VALUES ('Instrumenti',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('bela tehnika',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('kucni aparati',0,1,2);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('klima uredjaji',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('TV',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Muzicki uredjaji',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Racunari',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Kamere',0,1,1);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Fotoaparati',0,1,2);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Telefoni',0,1,2);
+INSERT INTO `poslovnainformatikadb`.grupa_robe (naziv,obrisano,preduzece_id, stopa_pdv_id) VALUES ('Instrumenti',0,1,1);
 
 
 INSERT INTO `poslovnainformatikadb`.roba (jedinica_mere, naziv_robe, obrisano, grupa_robe_id) VALUES ('komad', 'iPhone 12', false, 9);

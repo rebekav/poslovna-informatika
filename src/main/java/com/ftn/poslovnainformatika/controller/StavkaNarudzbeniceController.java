@@ -1,11 +1,17 @@
 package com.ftn.poslovnainformatika.controller;
 
+import com.ftn.poslovnainformatika.dto.StavkaNarudzbeniceDTO;
+import com.ftn.poslovnainformatika.mapper.StavkaNarudzbeniceToStavkaNarudzbeniceDTO;
 import com.ftn.poslovnainformatika.model.Narudzbenica;
 import com.ftn.poslovnainformatika.model.Roba;
 import com.ftn.poslovnainformatika.model.StavkaNarudzbenice;
+import com.ftn.poslovnainformatika.service.INarudzbenicaService;
 import com.ftn.poslovnainformatika.service.IRobaService;
+import com.ftn.poslovnainformatika.service.IStavkaNarudzbeniceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -41,6 +47,13 @@ public class StavkaNarudzbeniceController {
         stavka.setObrisano(false);
 
         stavkaNarudzbeniceService.save(stavka);
+    }
+
+    @GetMapping("/stavkaNarudzbenice/obrisi/{id}/{narudzbenicaId}")
+    public String izbrisiStavkuNarudzbenice(@PathVariable long id, @PathVariable long narudzbenicaId) {
+        StavkaNarudzbenice stavka = stavkaNarudzbeniceService.findOne(id);
+        stavkaNarudzbeniceService.izbrisiStavkuNarudzbenice(stavka);
+        return "redirect:/narudzbenica/detalji/{narudzbenicaId}";
     }
 
 }

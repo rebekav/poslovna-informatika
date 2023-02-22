@@ -1,17 +1,6 @@
 $(document).ready(function(){
 
-
-    var stavka;
-    var deleteContent = $("#delete_content");
-    var deleteStavka = $("#delete_stavka");
     racunOtpremnice();
-
-
-
-
-
-
-
 
     $("#addStavkaOtpremnice").click(function(e){
 
@@ -93,7 +82,4 @@ $(document).ready(function(){
         });
         $("#rezultat").html(rezultat);
     }
-
-
-
 });

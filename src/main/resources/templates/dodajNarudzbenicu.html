@@ -21,10 +21,10 @@
       <div class=col-8>
         <select th:field="*{poslovniPartner}" class="form-control">
           <option th:if="${tipNarudzbenice == 0}"
-                  th:value="0"
+                  th:value="0" th:disabled="disabled"
                   th:text="kupci">kupci</option>
           <option th:if="${tipNarudzbenice == 1}"
-                  th:value="1"
+                  th:value="1" th:disabled="disabled"
                   th:text="dobavljaci">dobavljaci</option>
           <option th:each="poslovniPartner : ${listaPoslovnihPartnera}" th:value="${poslovniPartner.id}"
                   th:text="${poslovniPartner.nazivPoslovnogPartnera}" th:selected="${tipNarudzbenice}"></option>

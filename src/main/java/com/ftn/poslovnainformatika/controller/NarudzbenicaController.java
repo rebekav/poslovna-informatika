@@ -114,7 +114,9 @@ public class NarudzbenicaController {
     public String detaljiNarudzbenice(Model model, @PathVariable int idNarudzbenice) {
         long re = 5;
         Narudzbenica narudzbenica = narudzbenicaService.getOne(idNarudzbenice);
-        List<Roba> robe = robaService.findAll();
+        List<Roba> robe = robaService.findAll().stream()
+                .filter(rb -> rb.getStavkeCenovnika().size() > 0)
+                .collect(Collectors.toList());
         List<StavkaNarudzbenice> stavkeNarudzbenice = stavkaNarudzbeniceService.findAll().stream()
                 .filter(sn -> sn.getNarudzbenica().getId() == idNarudzbenice)
                 .collect(Collectors.toList());

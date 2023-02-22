@@ -87,10 +87,6 @@ public class NarudzbenicaService implements INarudzbenicaService {
         }
 
 
-
-
-        //    List<Cjenovnik> cjenovnici = cjenovnikService.findAllByPreduzeceId(narudzbenica.getPreduzece().getId());
-
         List<StavkeCenovnika> stavkeCenovnika = new ArrayList<StavkeCenovnika>();
 
         for (Cenovnik c : cenovnici) {

@@ -24,7 +24,7 @@ public class StavkeCenovnika {
 	private float cena;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "cjenovnik_id")
+	@JoinColumn(name = "cenovnik_id")
 	private Cenovnik cenovnik;
 
 	@ManyToOne(fetch = FetchType.EAGER)

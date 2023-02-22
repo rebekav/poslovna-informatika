@@ -12,14 +12,13 @@
   <div class="row col-md-12 table-responsive">
     <a class="btn btn-primary"
        th:href="@{'/narudzbenice?tipNarudzbenice=0'}"
-       role="button" id="prikaziKupce">Ulazne naruzbenice</a> <a class="btn btn-warning"
-                                                                 th:href="@{'/narudzbenice?tipNarudzbenice=1'}"
-                                                                 role="button" id="prikaziDobavljace">Izlazne narudzbenice</a>
+       role="button" id="prikaziKupce">Ulazne naruzbenice</a>
+    <a class="btn btn-warning" th:href="@{'/narudzbenice?tipNarudzbenice=1'}" role="button" id="prikaziDobavljace">Izlazne narudzbenice</a>
     <div th:if="${tipNarudzbenice == 3}">
       <table id="customerTable" class="table">
         <thead>
         <tr>
-          <th>Broj narudzbenice</th>
+          <th>Godina poslovanja</th>
           <th>Poslovni partner</th>
         </tr>
         </thead>
@@ -47,7 +46,6 @@
         </tr>
         </thead>
         <tbody>
-
 
         <tr th:each="narudzbenica, rowStat: ${narudzbeniceFilter}"
             th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">

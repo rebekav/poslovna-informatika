@@ -66,7 +66,7 @@ public class PreduzeceController {
         public String azurirajPreduzece(PreduzeceDTO preduzeceDTO) {
 
             preduzeceService.save(preduzeceDTOToPreduzece.konvertujDtoToEntity(preduzeceDTO));
-                 return "redirect:/preduzece";
+                 return "redirect:/";
     }
 
 }

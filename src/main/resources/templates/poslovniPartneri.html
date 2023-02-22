@@ -9,6 +9,15 @@
 <div th:insert="template :: navbar"></div>
 <div class="container ">
     <h1>Poslovni Partneri</h1>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1"><i
+                        class="fa fa-search"></i></span>
+        </div>
+        <input id="search" type="text" class="form-control"
+               placeholder="Pretraga..." aria-label="Search"
+               aria-describedby="basic-addon1">
+    </div>
     <div class="row col-md-12 table-responsive">
         <a class="btn btn-primary"
            th:href="@{'/poslovniPartneri?tipPoslovnogPartnera=0'}"
@@ -26,7 +35,7 @@
                 <th>Azuriraj</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody  class="searchTable">
             <div th:if="${tipPoslovnogPartnera}">
                 <tr th:each="poslovniPartner, rowStat: ${poslovniPartneri}"
                     th:style="${rowStat.even} ? 'color: gray' : 'color: blue;'">
@@ -60,5 +69,6 @@
     </div>
 </div>
 <div th:replace="template :: scriptFrag"></div>
+<script th:src="@{/js/search.js}"></script>
 </body>
 </html>

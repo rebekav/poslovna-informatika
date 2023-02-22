@@ -68,7 +68,7 @@ public class OtpremnicaService implements IOtpremnicaService {
 
 
         List<Cenovnik> cenovnik = cenovnikService.findAll().stream()
-                .filter(c -> c.getPreduzece().getId() == 1)
+                .filter(c -> c.getPoslovniPartner().getId() == otpremnica.getPoslovniPartner().getId())
                 .collect(Collectors.toList());
 
 

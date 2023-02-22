@@ -27,4 +27,15 @@ public class StavkaNarudzbeniceService implements IStavkaNarudzbeniceService {
         return stavkaNarudzbeniceRepository.findAllStavkeNarudzbenice();
     }
 
+    @Override
+    public StavkaNarudzbenice findOne(long id) {
+        return stavkaNarudzbeniceRepository.getOne(id);
+    }
+
+    @Override
+    public void izbrisiStavkuNarudzbenice(StavkaNarudzbenice stavka) {
+        stavka.setObrisano(true);
+        stavkaNarudzbeniceRepository.save(stavka);
+
+    }
 }

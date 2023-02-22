@@ -10,4 +10,6 @@ public interface IStavkaNarudzbeniceService {
     List<StavkaNarudzbenice> findAll(Long narudzbenica);
     List<StavkaNarudzbenice> findAll();
 
+    StavkaNarudzbenice findOne(long id);
+    void izbrisiStavkuNarudzbenice(StavkaNarudzbenice stavka);
 }
