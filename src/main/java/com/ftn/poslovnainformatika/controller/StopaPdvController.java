@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class StopaPdvController {
@@ -83,8 +85,17 @@ public class StopaPdvController {
     }
 
     @PostMapping("/stopaPdv/kreiraj")
-    public String kreirajStopuPdv(StopaPdvDTO stopaPdvDTO) {
-        stopaPdvService.save(stopaPdvDTOToStopaPdv.konvertujDtoToEntity(stopaPdvDTO));
+    public String kreirajStopuPdv(StopaPdvDTO stopaPdvDTO) throws Exception {
+        List<StopaPdv> postojeceStopePDVa = stopaPdvService.findAll().stream().filter(sp -> sp.getPdv().getId() == stopaPdvDTO.getPdv().getId())
+                .collect(Collectors.toList());
+        for(StopaPdv stopaPDV: postojeceStopePDVa) {
+            stopaPdvService.izbrisiStopuPdv(stopaPDV);
+        }
+        if(stopaPdvDTO.getRokVazenja().before(new Date())) {
+            throw new Exception("Datum vazenja stope pdv-a mora biti u buducnosti");
+        }else {
+            stopaPdvService.save(stopaPdvDTOToStopaPdv.konvertujDtoToEntity(stopaPdvDTO));
+        }
         return "redirect:/stopaPdv";
     }
 

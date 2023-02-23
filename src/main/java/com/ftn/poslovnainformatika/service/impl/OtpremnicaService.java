@@ -159,8 +159,8 @@ public class OtpremnicaService implements IOtpremnicaService {
         for(StavkaOtpremnice so : stavkeOtpremnice) {
 
             Set<StopaPdv> stopePDva = so.getRoba().getGrupaRobe().getPdv().getStopePdv();
-            StopaPdv stopaPdv = stopePDva.stream()
-                    .filter(sp -> sp.getRokVazenja().after(new Date())).findFirst().get();
+            StopaPdv stopaPdv = stopePDva.stream().filter(sp -> !sp.isObrisano()).findFirst().get();
+
             StavkaFakture stavkaFakture = new StavkaFakture();
             stavkaFakture.setIznosPDV(so.getUkupanIznos()* (stopaPdv.getProcenat() / 100));
             stavkaFakture.setProcenatPDV(stopaPdv.getProcenat());

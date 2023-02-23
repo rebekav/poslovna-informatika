@@ -110,8 +110,7 @@ public class NarudzbenicaService implements INarudzbenicaService {
 
 
                     Set<StopaPdv> stopePDva = sn.getRoba().getGrupaRobe().getPdv().getStopePdv();
-                    StopaPdv stopaPdv = stopePDva.stream()
-                            .filter(sp -> sp.getRokVazenja().after(new Date())).findFirst().get();
+                    StopaPdv stopaPdv = stopePDva.stream().filter(sp -> !sp.isObrisano()).findFirst().get();
 
                     StavkaFakture novaStavkaFakture = new StavkaFakture();
                     novaStavkaFakture.setIznosPDV(sc.getCena() * sn.getKolicina() * (stopaPdv.getProcenat() / 100));

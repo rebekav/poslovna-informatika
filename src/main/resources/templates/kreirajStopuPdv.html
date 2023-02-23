@@ -34,7 +34,7 @@
             <div class="form-group row">
                 <label class="col-form-label col-4">Rok vazenja</label>
                 <div class=col-8>
-                    <input type="date" class="form-control" th:field="*{rokVazenja}"
+                    <input type="date" class="form-control createStopaPDVDate" th:field="*{rokVazenja}"
                            required value="${stopaPdv.rokVazenja}" />
                 </div>
             </div>
@@ -45,5 +45,6 @@
     </form>
 </div>
 <div th:replace="template :: scriptFrag"></div>
+<script  th:src="@{/js/stopaPDV.js}"></script>
 </body>
 </html>
