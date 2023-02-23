@@ -42,7 +42,11 @@ public class PdfOtpremnicaExporter {
         table.addCell("PIB: " + otpremnica.getPreduzece().getPIB());
         table.addCell("email: " + otpremnica.getPreduzece().getEmailAdresa());
 
-        document.add(table);
+        try {
+            document.add(table);
+        } catch (DocumentException e) {
+
+        }
     }
 
     private void writeTableHeader(PdfPTable table) {
@@ -109,7 +113,11 @@ public class PdfOtpremnicaExporter {
                 + otpremnica.getPoslovniPartner().getMesto().getGrad());
         table.addCell(" ");
 
-        document.add(table);
+        try {
+            document.add(table);
+        } catch (DocumentException e) {
+
+        }
     }
 
     public void export(HttpServletResponse response) throws DocumentException, IOException {

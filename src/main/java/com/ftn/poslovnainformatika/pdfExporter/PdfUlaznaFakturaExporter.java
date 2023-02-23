@@ -46,7 +46,11 @@ public class PdfUlaznaFakturaExporter {
         table.addCell("Tekuci racun: \n" + faktura.getPreduzece().getTekuciRacun());
         table.addCell("Tekuci racun: \n" + faktura.getPoslovniPartner().getTekuciRacun());
 
-        document.add(table);
+        try {
+            document.add(table);
+        } catch (DocumentException e) {
+
+        }
     }
 
     private void writeTableHeader(PdfPTable table) {
@@ -149,7 +153,11 @@ public class PdfUlaznaFakturaExporter {
         table.addCell("");
         table.addCell("Ukupno za placanje: \n" + faktura.getIznosZaPlacanje() + "\n___________________________");
 
-        document.add(table);
+        try {
+            document.add(table);
+        } catch (DocumentException e) {
+
+        }
     }
 
     public void export(HttpServletResponse response) throws DocumentException, IOException {
