@@ -10,6 +10,10 @@ import com.ftn.poslovnainformatika.service.IFakturaService;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
 import com.lowagie.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +84,6 @@ public class FakturaController {
         response.setContentType("application/pdf");
 
         Faktura faktura = fakturaService.getOne(idFakture);
-
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=" + faktura.getBrojFakture() + "_"
                 + faktura.getPoslovnaGodina().getGodinaPoslovanja() + ".pdf";
