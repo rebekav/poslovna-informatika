@@ -9,12 +9,14 @@ import com.ftn.poslovnainformatika.service.IFakturaService;
 import com.ftn.poslovnainformatika.service.INarudzbenicaService;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Service
 public class NarudzbenicaService implements INarudzbenicaService {
 
     @Autowired

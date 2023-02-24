@@ -9,7 +9,6 @@ import com.ftn.poslovnainformatika.pdfExporter.PdfUlaznaFakturaExporter;
 import com.ftn.poslovnainformatika.service.IFakturaService;
 import com.ftn.poslovnainformatika.service.IStavkeFakture;
 import com.lowagie.text.DocumentException;
-import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -19,9 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
